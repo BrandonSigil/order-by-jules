@@ -1,0 +1,171 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<!-- Top bar -->
+<div class="bg-terracotta text-cream text-center py-2 px-4 text-sm font-sans tracking-wide">
+  Serving overwhelmed women and families in Tacoma with joy-filled home organization.
+</div>
+
+<header
+  id="site-header"
+  class="sticky top-0 z-50 transition-all duration-500"
+  transition:persist
+>
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex-shrink-0 relative z-10">
+      <img
+        src="/images/logo.png"
+        alt="Order by Jules"
+        class="h-14 md:h-16 w-auto"
+      />
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              'font-sans text-sm tracking-widest uppercase transition-colors duration-300 animated-underline',
+              currentPath === link.href
+                ? 'text-terracotta font-semibold'
+                : 'text-warm hover:text-terracotta',
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="/contact"
+          class="inline-block bg-terracotta text-cream px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide uppercase transition-all duration-300 hover:bg-terracotta-dark hover:shadow-lg hover:shadow-terracotta/20"
+        >
+          Book Now
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="menu-toggle"
+      class="md:hidden relative z-10 w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line w-6 h-0.5 bg-warm-dark transition-all duration-300 origin-center"></span>
+      <span class="hamburger-line w-6 h-0.5 bg-warm-dark transition-all duration-300 origin-center"></span>
+      <span class="hamburger-line w-4 h-0.5 bg-warm-dark transition-all duration-300 origin-center ml-auto"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div
+    id="mobile-menu"
+    class="md:hidden fixed inset-0 z-40 pointer-events-none opacity-0 transition-opacity duration-300"
+  >
+    <div class="absolute inset-0 bg-cream/95 backdrop-blur-xl"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center h-full gap-8">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'font-playfair text-3xl transition-colors duration-300',
+            currentPath === link.href
+              ? 'text-terracotta'
+              : 'text-warm-dark hover:text-terracotta',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <div class="gold-rule mt-4"></div>
+      <a
+        href="/contact"
+        class="inline-block bg-terracotta text-cream px-8 py-3 rounded-full text-lg font-sans font-semibold tracking-wide transition-all duration-300 hover:bg-terracotta-dark"
+      >
+        Book Now
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  header.scrolled {
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    background: rgba(251, 247, 242, 0.9);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  header.scrolled nav {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  /* Hamburger animation when open */
+  header.menu-open .hamburger-line:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+  }
+  header.menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  header.menu-open .hamburger-line:nth-child(3) {
+    width: 1.5rem;
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  #mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+<script>
+  function initHeader() {
+    const header = document.getElementById('site-header');
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+
+    if (!header || !toggle || !menu) return;
+
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.contains('open');
+      menu.classList.toggle('open');
+      header.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        header.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  initHeader();
+  document.addEventListener('astro:after-swap', initHeader);
+</script>

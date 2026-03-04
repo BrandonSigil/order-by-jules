@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import CTASection from '../components/CTASection.astro';
+---
+
+<Layout title="Services" description="Home organization, moving support, and downsizing services in the Greater Tacoma Area. Decluttering, packing, and organizing with joy.">
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="bg-cream pt-20 pb-12 md:pt-28 md:pb-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">What I offer</span>
+      <h1 class="font-playfair text-4xl md:text-5xl lg:text-6xl text-warm-dark leading-[1.1] mb-6 reveal stagger-1">
+        Services
+      </h1>
+      <p class="text-lg text-warm max-w-2xl mx-auto reveal stagger-2">
+        Every service is designed to bring clarity, function, and peace back into your home.
+      </p>
+    </div>
+  </section>
+
+  <SectionDivider variant="wave1" toColor="#FFFFFF" />
+
+  <!-- ===== MAIN SERVICES ===== -->
+  <section class="bg-white py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Service 1: Home Organization -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-28">
+        <div class="reveal-left">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl shadow-warm-dark/10">
+            <div class="w-full h-full bg-gradient-to-br from-gold-pale/80 via-cream to-sage-light/40 flex items-center justify-center">
+              <div class="text-center p-8">
+                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
+                  <svg class="w-10 h-10 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </div>
+                <p class="font-cormorant text-xl italic text-warm-muted">Photo: organized kitchen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-right">
+          <div class="inline-block bg-gold-pale text-warm-dark font-sans text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+            Core Service
+          </div>
+          <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark leading-tight mb-4">
+            Home Organization
+          </h2>
+          <p class="text-lg text-warm leading-relaxed mb-4">
+            Kitchens, pantries, closets, bedrooms, playrooms, garages, and whole-home resets.
+          </p>
+          <p class="text-lg text-warm leading-relaxed mb-6">
+            We declutter, simplify, and create clear systems that make daily life easier.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {['Kitchens', 'Pantries', 'Closets', 'Bedrooms', 'Playrooms', 'Garages', 'Whole Home'].map((tag) => (
+              <span class="inline-block bg-cream text-warm text-sm px-3 py-1 rounded-full border border-gold-light/50">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 2: Moving Support -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-28">
+        <div class="order-2 lg:order-1 reveal-left">
+          <div class="inline-block bg-terracotta/10 text-terracotta font-sans text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+            Transition Support
+          </div>
+          <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark leading-tight mb-4">
+            Moving Support
+          </h2>
+          <p class="text-lg text-warm leading-relaxed mb-4">
+            Packing your current home with intention. Organizing your new home from day one.
+          </p>
+          <p class="font-cormorant text-xl italic text-terracotta leading-relaxed">
+            Transitions feel lighter when your systems are set up properly from the start.
+          </p>
+        </div>
+
+        <div class="order-1 lg:order-2 reveal-right">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl shadow-warm-dark/10">
+            <div class="w-full h-full bg-gradient-to-br from-terracotta/5 via-gold-pale/60 to-cream flex items-center justify-center">
+              <div class="text-center p-8">
+                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-terracotta/10 flex items-center justify-center">
+                  <svg class="w-10 h-10 text-terracotta/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                </div>
+                <p class="font-cormorant text-xl italic text-warm-muted">Photo: packing & moving</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 3: Downsizing -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="reveal-left">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl shadow-warm-dark/10">
+            <div class="w-full h-full bg-gradient-to-br from-sage-light/50 via-cream to-gold-pale/40 flex items-center justify-center">
+              <div class="text-center p-8">
+                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-sage/20 flex items-center justify-center">
+                  <svg class="w-10 h-10 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <p class="font-cormorant text-xl italic text-warm-muted">Photo: peaceful space</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-right">
+          <div class="inline-block bg-sage-light text-warm-dark font-sans text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+            Compassionate Care
+          </div>
+          <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark leading-tight mb-4">
+            Downsizing Support
+          </h2>
+          <p class="text-lg text-warm leading-relaxed mb-4">
+            Compassionate, efficient help for life transitions.
+          </p>
+          <p class="font-cormorant text-xl italic text-terracotta leading-relaxed">
+            We walk through decisions together and create a peaceful next chapter.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider variant="wave3" toColor="#FBF7F2" />
+
+  <!-- ===== ADD-ON SERVICES ===== -->
+  <section class="bg-cream py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">Extras</span>
+        <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark reveal stagger-1">
+          Add-On Services
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        {[
+          { icon: '🚗', title: 'Donation Drop-Off', desc: 'I handle the trip to Goodwill or your preferred donation center.' },
+          { icon: '🗑️', title: 'Dump Run Assistance', desc: 'Need to haul items away? I coordinate and assist with disposal.' },
+          { icon: '🏷️', title: 'Product Recommendations', desc: 'Personalized suggestions for bins, labels, and organizing tools.' },
+          { icon: '🏠', title: 'Multi-Room Packages', desc: 'Discounted rates when we tackle multiple spaces together.' },
+        ].map((addon, i) => (
+          <div class:list={['bg-white rounded-xl p-6 card-hover reveal', `stagger-${i + 1}`]}>
+            <div class="flex items-start gap-4">
+              <span class="text-2xl flex-shrink-0 mt-1">{addon.icon}</span>
+              <div>
+                <h3 class="font-playfair text-lg text-warm-dark mb-1">{addon.title}</h3>
+                <p class="text-warm text-sm leading-relaxed">{addon.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <CTASection
+    headline="Ready for a Custom Plan?"
+    subtext="Every home is different. Let's create a plan that fits yours."
+    buttonText="Get a Custom Plan"
+    buttonHref="/contact"
+    variant="warm"
+  />
+
+</Layout>

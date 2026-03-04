@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;
+  price: string;
+  detail: string;
+  featured?: boolean;
+  delay?: number;
+}
+
+const { title, price, detail, featured = false, delay = 0 } = Astro.props;
+---
+
+<div class:list={[
+  'relative rounded-2xl p-8 md:p-10 card-hover reveal',
+  featured
+    ? 'bg-gradient-to-br from-terracotta to-terracotta-dark text-cream shadow-xl shadow-terracotta/20'
+    : 'bg-white border-2 border-gold-light',
+  delay > 0 && `stagger-${delay}`,
+]}>
+  {featured && (
+    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-warm-dark text-xs font-sans font-bold uppercase tracking-widest px-4 py-1 rounded-full">
+      Most Popular
+    </div>
+  )}
+
+  <h3 class:list={[
+    'font-playfair text-2xl mb-2',
+    featured ? 'text-cream' : 'text-warm-dark',
+  ]}>
+    {title}
+  </h3>
+
+  <div class="mb-4">
+    <span class:list={[
+      'font-playfair text-4xl md:text-5xl font-bold',
+      featured ? 'text-gold-light' : 'gradient-text',
+    ]}>
+      {price}
+    </span>
+  </div>
+
+  <p class:list={[
+    'text-sm leading-relaxed',
+    featured ? 'text-cream/80' : 'text-warm',
+  ]}>
+    {detail}
+  </p>
+
+  <div class:list={[
+    'mt-6 w-full h-[2px]',
+    featured
+      ? 'bg-gradient-to-r from-transparent via-gold-light/40 to-transparent'
+      : 'bg-gradient-to-r from-transparent via-gold/30 to-transparent',
+  ]}></div>
+
+  <div class="mt-6">
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,51 @@
+---
+interface Props {
+  variant?: 'wave1' | 'wave2' | 'wave3' | 'curve';
+  flip?: boolean;
+  fromColor?: string;
+  toColor?: string;
+}
+
+const {
+  variant = 'wave1',
+  flip = false,
+  fromColor = '#FBF7F2',
+  toColor = '#FFFFFF',
+} = Astro.props;
+---
+
+<div
+  class:list={['relative w-full overflow-hidden leading-[0] -my-px', flip && 'rotate-180']}
+  aria-hidden="true"
+>
+  {variant === 'wave1' && (
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-16 md:h-24 lg:h-28">
+      <defs>
+        <linearGradient id={`grad-${variant}-${flip}`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color={fromColor} />
+          <stop offset="100%" stop-color={toColor} />
+        </linearGradient>
+      </defs>
+      <path d="M0 0L48 8C96 16 192 32 288 42.7C384 53 480 59 576 53.3C672 48 768 32 864 26.7C960 21 1056 27 1152 37.3C1248 48 1344 64 1392 72L1440 80V120H0Z" fill={toColor}/>
+    </svg>
+  )}
+
+  {variant === 'wave2' && (
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-16 md:h-24 lg:h-28">
+      <path d="M0 40L60 35C120 30 240 20 360 25C480 30 600 50 720 55C840 60 960 50 1080 40C1200 30 1320 20 1380 15L1440 10V120H0Z" fill={toColor}/>
+    </svg>
+  )}
+
+  {variant === 'wave3' && (
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-16 md:h-24 lg:h-28">
+      <path d="M0 60L80 55C160 50 320 40 480 45C640 50 800 70 960 72C1120 74 1280 58 1360 50L1440 42V120H0Z" fill={toColor}/>
+      <path d="M0 80L80 78C160 76 320 72 480 74C640 76 800 84 960 86C1120 88 1280 84 1360 82L1440 80V120H0Z" fill={toColor} opacity="0.5"/>
+    </svg>
+  )}
+
+  {variant === 'curve' && (
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-12 md:h-20">
+      <ellipse cx="720" cy="80" rx="900" ry="80" fill={toColor}/>
+    </svg>
+  )}
+</div>

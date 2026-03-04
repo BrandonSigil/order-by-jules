@@ -1,0 +1,70 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="relative overflow-hidden">
+  <!-- Wave divider at top -->
+  <div class="absolute top-0 left-0 right-0 transform -translate-y-[98%]">
+    <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-16 md:h-24">
+      <path d="M0 100L0 60C120 80 240 40 360 35C480 30 600 55 720 60C840 65 960 35 1080 30C1200 25 1320 50 1440 55L1440 100Z" fill="#3D3530"/>
+    </svg>
+  </div>
+
+  <div class="bg-warm-dark text-cream/80 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <!-- Brand column -->
+        <div>
+          <img src="/images/logo.png" alt="Order by Jules" class="h-16 w-auto mb-4 brightness-0 invert opacity-90" />
+          <p class="font-cormorant text-xl italic text-gold-light leading-relaxed">
+            "Joyfully restoring peace, one room at a time."
+          </p>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <h4 class="font-playfair text-lg text-cream mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="/" class="hover:text-gold transition-colors duration-300">Home</a></li>
+            <li><a href="/about" class="hover:text-gold transition-colors duration-300">About Jules</a></li>
+            <li><a href="/services" class="hover:text-gold transition-colors duration-300">Services</a></li>
+            <li><a href="/pricing" class="hover:text-gold transition-colors duration-300">Pricing</a></li>
+            <li><a href="/contact" class="hover:text-gold transition-colors duration-300">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact info -->
+        <div>
+          <h4 class="font-playfair text-lg text-cream mb-4">Get in Touch</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 mt-0.5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span>Serving the Greater Tacoma Area</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 mt-0.5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <a href="mailto:hello@orderbyjules.com" class="hover:text-gold transition-colors duration-300">hello@orderbyjules.com</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 mt-0.5 text-gold flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+              <a href="#" class="hover:text-gold transition-colors duration-300">@orderbyjules</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="border-t border-cream/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-cream/50">
+        <p>&copy; {currentYear} Order by Jules. All rights reserved.</p>
+        <p class="font-cormorant italic text-cream/40">Built with care in Tacoma, WA</p>
+      </div>
+    </div>
+  </div>
+</footer>

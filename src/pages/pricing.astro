@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import PricingCard from '../components/PricingCard.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import CTASection from '../components/CTASection.astro';
+---
+
+<Layout title="Pricing" description="Clear pricing for home organization services. Starting at $40/hour with no surprises. Serving the Greater Tacoma Area.">
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="bg-cream pt-20 pb-12 md:pt-28 md:pb-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">Transparent pricing</span>
+      <h1 class="font-playfair text-4xl md:text-5xl lg:text-6xl text-warm-dark leading-[1.1] mb-6 reveal stagger-1">
+        Investment
+      </h1>
+      <p class="text-lg text-warm max-w-2xl mx-auto reveal stagger-2">
+        Clear pricing. No surprises. Just honest work toward a more peaceful home.
+      </p>
+    </div>
+  </section>
+
+  <SectionDivider variant="curve" toColor="#FFFFFF" />
+
+  <!-- ===== PRICING CARDS ===== -->
+  <section class="bg-white py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Hourly Rate -->
+        <PricingCard
+          title="Hourly Rate"
+          price="$40"
+          detail="Per hour with a 2-hour minimum per session. Perfect for targeted spaces or first-time clients."
+          delay={1}
+        >
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2 text-sm text-warm">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Hands-on organizing
+            </li>
+            <li class="flex items-start gap-2 text-sm text-warm">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Decision-making support
+            </li>
+            <li class="flex items-start gap-2 text-sm text-warm">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Light cleaning included
+            </li>
+          </ul>
+        </PricingCard>
+
+        <!-- Flat Rate (featured) -->
+        <PricingCard
+          title="Flat-Rate Projects"
+          price="$100–$350"
+          detail="Scoped to your specific needs. Ideal for single rooms, closet overhauls, or move-in setups."
+          featured={true}
+          delay={2}
+        >
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2 text-sm text-cream/80">
+              <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Everything in Hourly
+            </li>
+            <li class="flex items-start gap-2 text-sm text-cream/80">
+              <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Fixed cost for peace of mind
+            </li>
+            <li class="flex items-start gap-2 text-sm text-cream/80">
+              <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Labels included
+            </li>
+          </ul>
+        </PricingCard>
+
+        <!-- Travel -->
+        <PricingCard
+          title="Travel Fee"
+          price="$40"
+          detail="For jobs located more than 1 hour from the Greater Tacoma area. Local clients — no travel fee!"
+          delay={3}
+        >
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2 text-sm text-warm">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Free within Tacoma area
+            </li>
+            <li class="flex items-start gap-2 text-sm text-warm">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              One-time flat fee
+            </li>
+            <li class="flex items-start gap-2 text-sm text-warm">
+              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Quoted upfront
+            </li>
+          </ul>
+        </PricingCard>
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider variant="wave2" toColor="#FBF7F2" />
+
+  <!-- ===== WHAT'S INCLUDED ===== -->
+  <section class="bg-cream py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">Every session includes</span>
+        <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark reveal stagger-1">
+          What's Included
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-14">
+        {[
+          'Free consultation',
+          'Hands-on organizing support',
+          'Light cleaning as needed',
+          'Labels included',
+          'Personalized product recommendations',
+          'Judgment-free environment',
+        ].map((item, i) => (
+          <div class:list={['flex items-center gap-3 bg-white rounded-xl px-5 py-4 reveal', `stagger-${Math.min(i + 1, 6)}`]}>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="text-warm-dark font-medium">{item}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Transparency note -->
+      <div class="max-w-2xl mx-auto text-center reveal">
+        <div class="bg-white rounded-2xl p-8 border border-gold-light/30">
+          <svg class="w-10 h-10 text-gold mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          <p class="font-cormorant text-xl italic text-warm-dark leading-relaxed">
+            If additional time is needed beyond our estimate, you will always be informed before continuing.
+          </p>
+          <p class="text-warm mt-3 text-sm">
+            No surprises. Full transparency. Always.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <CTASection
+    headline="Ready to Get Started?"
+    subtext="Your free consultation is just one click away."
+    buttonText="Book My Free Consultation"
+    buttonHref="/contact"
+    variant="warm"
+  />
+
+</Layout>

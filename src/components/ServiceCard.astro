@@ -1,0 +1,46 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  image?: string;
+  delay?: number;
+}
+
+const { title, description, icon, image, delay = 0 } = Astro.props;
+---
+
+<div class:list={[
+  'group bg-white rounded-2xl overflow-hidden card-hover reveal',
+  delay > 0 && `stagger-${delay}`,
+]}>
+  {image && (
+    <div class="relative h-56 overflow-hidden">
+      <div
+        class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+        style={`background-image: url(${image})`}
+        role="img"
+        aria-label={title}
+      >
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-warm-dark/30 to-transparent"></div>
+    </div>
+  )}
+
+  {!image && icon && (
+    <div class="pt-8 px-8">
+      <div class="w-16 h-16 rounded-full bg-gold-pale flex items-center justify-center mb-2 group-hover:bg-gold-light transition-colors duration-300">
+        <span class="text-2xl" set:html={icon} />
+      </div>
+    </div>
+  )}
+
+  <div class="p-8">
+    <h3 class="font-playfair text-xl md:text-2xl text-warm-dark mb-3 group-hover:text-terracotta transition-colors duration-300">
+      {title}
+    </h3>
+    <p class="text-warm leading-relaxed">
+      {description}
+    </p>
+  </div>
+</div>

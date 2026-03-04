@@ -1,0 +1,210 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import ProcessStep from '../components/ProcessStep.astro';
+import CTASection from '../components/CTASection.astro';
+---
+
+<Layout title="Home">
+
+  <!-- ===== HERO ===== -->
+  <section class="relative min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-cream">
+    <!-- Animated sunrise -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex flex-col items-center pointer-events-none hero-sunrise">
+      <!-- Sun rays -->
+      <div class="relative w-[500px] h-[500px] md:w-[700px] md:h-[700px] opacity-0 animate-ray-spread">
+        {Array.from({ length: 16 }).map((_, i) => (
+          <div
+            class="absolute bottom-1/2 left-1/2 w-[2px] origin-bottom"
+            style={`
+              height: ${120 + Math.random() * 80}px;
+              transform: translateX(-50%) rotate(${-90 + i * (180 / 15)}deg);
+              background: linear-gradient(to top, rgba(232, 184, 109, 0.4), transparent);
+            `}
+          />
+        ))}
+      </div>
+      <!-- Sun orb -->
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[30%] w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full opacity-0 animate-sun-rise"
+        style="background: radial-gradient(circle at 50% 60%, #F5D5A0, #E8B86D 40%, rgba(232, 184, 109, 0.2) 70%, transparent 100%);"
+      >
+      </div>
+    </div>
+
+    <!-- Hero content -->
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-20 pb-32 md:pb-40">
+      <div class="mb-6 opacity-0 animate-fade-up" style="animation-delay: 0.3s;">
+        <span class="inline-block font-cormorant text-lg md:text-xl italic text-warm tracking-wide">
+          Order by Jules
+        </span>
+      </div>
+
+      <h1 class="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-warm-dark leading-[1.1] mb-6 opacity-0 animate-fade-up" style="animation-delay: 0.5s;">
+        There Is <em class="font-cormorant italic text-terracotta not-italic">Peace</em><br class="hidden sm:block" />
+        on the Other Side<br class="hidden sm:block" />
+        of Overwhelm.
+      </h1>
+
+      <p class="font-sans text-lg md:text-xl text-warm max-w-2xl mx-auto mb-10 opacity-0 animate-fade-up" style="animation-delay: 0.7s;">
+        Decluttering and home organization for overwhelmed moms, busy women, and families preparing for life transitions.
+      </p>
+
+      <div class="opacity-0 animate-fade-up" style="animation-delay: 0.9s;">
+        <Button href="/contact" variant="primary" size="lg">
+          Book Your Free Consultation
+        </Button>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style="animation-delay: 1.5s;">
+      <div class="w-6 h-10 rounded-full border-2 border-warm-muted/40 flex justify-center pt-2">
+        <div class="w-1 h-3 bg-warm-muted/40 rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider variant="wave1" toColor="#FFFFFF" />
+
+  <!-- ===== SECTION 1 — THE PROBLEM ===== -->
+  <section class="bg-white py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="max-w-2xl">
+        <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight mb-8 reveal">
+          Feeling <em class="font-cormorant italic text-terracotta not-italic">Overwhelmed</em> in Your Own Home?
+        </h2>
+
+        <div class="space-y-4 mb-10">
+          <p class="text-lg text-warm reveal stagger-1">Maybe the clutter keeps piling up.</p>
+          <p class="text-lg text-warm reveal stagger-2">Maybe you don't know where to start.</p>
+          <p class="text-lg text-warm reveal stagger-3">Maybe you're preparing to move or downsize.</p>
+          <p class="text-lg text-warm reveal stagger-4">Maybe you feel embarrassed inviting people over.</p>
+        </div>
+
+        <div class="space-y-2 mb-8 reveal stagger-5">
+          <p class="text-lg text-warm-dark font-medium">You don't need judgment.</p>
+          <p class="text-lg text-warm-dark font-medium">You don't need perfection.</p>
+        </div>
+
+        <div class="reveal stagger-6">
+          <div class="gold-rule !mx-0 mb-4"></div>
+          <p class="font-cormorant text-2xl md:text-3xl italic text-terracotta leading-relaxed">
+            You need clarity, momentum, and someone who sees hope in your space.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider variant="wave2" toColor="#FBF7F2" />
+
+  <!-- ===== SECTION 2 — THE SOLUTION ===== -->
+  <section class="bg-cream py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Text -->
+        <div class="reveal-left">
+          <span class="font-cormorant text-lg italic text-gold mb-2 block">The solution</span>
+          <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight mb-6">
+            Meet <em class="font-cormorant italic text-terracotta not-italic">Order by Jules</em>
+          </h2>
+
+          <div class="space-y-4 text-lg text-warm leading-relaxed">
+            <p>
+              I help women and families reclaim their homes through efficient, joy-filled organizing sessions.
+            </p>
+            <p>
+              Together, we declutter what no longer serves you, create simple systems that make sense for your real life, and restore peace to the spaces you use every day.
+            </p>
+            <p>
+              I bring strength, energy, and quick decision-making into spaces that feel heavy and overwhelming.
+            </p>
+          </div>
+
+          <div class="mt-8 space-y-1 text-warm-dark font-medium text-lg">
+            <p>No shame.</p>
+            <p>No chaos.</p>
+            <p class="font-cormorant text-2xl italic text-terracotta">Just steady progress toward peace.</p>
+          </div>
+
+          <div class="mt-10">
+            <Button href="/about" variant="outline" size="md">
+              Learn More
+            </Button>
+          </div>
+        </div>
+
+        <!-- Image placeholder -->
+        <div class="reveal-right">
+          <div class="relative">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-warm-dark/10">
+              <div class="w-full h-full bg-gradient-to-br from-gold-pale via-gold-light/40 to-cream flex items-center justify-center">
+                <div class="text-center p-8">
+                  <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
+                    <svg class="w-10 h-10 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <p class="font-cormorant text-xl italic text-warm-muted">Your photo here</p>
+                  <p class="text-sm text-warm-muted/60 mt-1">Organizing in action</p>
+                </div>
+              </div>
+            </div>
+            <!-- Decorative offset element -->
+            <div class="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border-2 border-gold/30 -z-10"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider variant="wave3" toColor="#FFFFFF" />
+
+  <!-- ===== SECTION 3 — HOW IT WORKS ===== -->
+  <section class="bg-white py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">How it works</span>
+        <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight reveal stagger-1">
+          A Simple <em class="font-cormorant italic text-terracotta not-italic">3-Step</em> Process
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        <ProcessStep
+          number={1}
+          title="Free Consultation"
+          description="We walk through your space, clarify your goals, and create a plan that fits your timeline and budget."
+        />
+        <ProcessStep
+          number={2}
+          title="Declutter + Organize"
+          description="We work side-by-side to simplify, sort, and build functional systems. I guide decision-making and handle the heavy lifting."
+        />
+        <ProcessStep
+          number={3}
+          title="Enjoy Your Peace"
+          description="You experience a calm, functional space that supports your daily life — not stresses it."
+          isLast={true}
+        />
+      </div>
+
+      <div class="text-center mt-16 reveal">
+        <Button href="/contact" variant="primary" size="lg">
+          Schedule My Consultation
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4 — FINAL CTA ===== -->
+  <CTASection
+    headline="Ready to Reclaim Your Space?"
+    subtext="There is hope for your home. Let's restore it together."
+    buttonText="Book Your Free Consultation"
+    buttonHref="/contact"
+    variant="warm"
+  />
+
+</Layout>

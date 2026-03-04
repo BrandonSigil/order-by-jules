@@ -1,0 +1,67 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  headline: string;
+  subtext?: string;
+  buttonText: string;
+  buttonHref: string;
+  variant?: 'warm' | 'cream' | 'gold';
+}
+
+const {
+  headline,
+  subtext,
+  buttonText,
+  buttonHref,
+  variant = 'warm',
+} = Astro.props;
+
+const bgClasses = {
+  warm: 'bg-gradient-to-br from-terracotta via-terracotta-dark to-warm-dark text-cream',
+  cream: 'bg-cream text-warm-dark',
+  gold: 'bg-gradient-to-br from-gold-light via-gold-pale to-cream text-warm-dark',
+};
+---
+
+<section class:list={['relative py-24 md:py-32 overflow-hidden', bgClasses[variant]]}>
+  <!-- Decorative sun rays -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
+    <div class="w-[600px] h-[600px] relative">
+      {Array.from({ length: 12 }).map((_, i) => (
+        <div
+          class="absolute top-1/2 left-1/2 w-1 h-48 origin-bottom -translate-x-1/2"
+          style={`transform: translateX(-50%) rotate(${i * 30}deg); background: linear-gradient(to top, ${variant === 'warm' ? 'rgba(255,255,255,0.3)' : 'rgba(232,184,109,0.4)'}, transparent);`}
+        />
+      ))}
+    </div>
+  </div>
+
+  <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+    <h2 class:list={[
+      'font-playfair text-3xl md:text-5xl leading-tight mb-6 reveal',
+      variant === 'warm' ? 'text-cream' : 'text-warm-dark',
+    ]}>
+      {headline}
+    </h2>
+
+    {subtext && (
+      <p class:list={[
+        'font-cormorant text-xl md:text-2xl italic mb-10 reveal stagger-1',
+        variant === 'warm' ? 'text-cream/80' : 'text-warm',
+      ]}>
+        {subtext}
+      </p>
+    )}
+
+    <div class="reveal stagger-2">
+      <Button
+        href={buttonHref}
+        variant={variant === 'warm' ? 'secondary' : 'primary'}
+        size="lg"
+      >
+        {buttonText}
+      </Button>
+    </div>
+  </div>
+</section>

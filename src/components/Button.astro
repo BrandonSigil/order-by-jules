@@ -1,0 +1,42 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  type?: 'button' | 'submit';
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  type = 'button',
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const baseClasses = 'inline-flex items-center justify-center font-sans font-semibold tracking-wide uppercase rounded-full transition-all duration-400 relative overflow-hidden group';
+
+const variants = {
+  primary: 'bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-xl hover:shadow-terracotta/20',
+  secondary: 'bg-gold text-warm-dark hover:bg-gold-light hover:shadow-xl hover:shadow-gold/20',
+  outline: 'bg-transparent border-2 border-terracotta text-terracotta hover:bg-terracotta hover:text-cream',
+};
+
+const sizes = {
+  sm: 'px-5 py-2.5 text-xs',
+  md: 'px-8 py-3.5 text-sm',
+  lg: 'px-10 py-4 text-base',
+};
+---
+
+<Tag
+  href={href}
+  type={!href ? type : undefined}
+  class:list={[baseClasses, variants[variant], sizes[size], className]}
+>
+  <span class="relative z-10"><slot /></span>
+  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+</Tag>

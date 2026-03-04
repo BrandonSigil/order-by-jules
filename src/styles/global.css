@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cream text-warm font-sans leading-relaxed;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #F5D5A0;
+    color: #3D3530;
+  }
+
+  ::-moz-selection {
+    background-color: #F5D5A0;
+    color: #3D3530;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair text-warm-dark;
+  }
+
+  :focus-visible {
+    outline: 2px solid #E8B86D;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #FBF7F2;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #E8B86D;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C1553D;
+  }
+}
+
+@layer components {
+  /* Scroll reveal - elements start hidden, animate in when visible */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Stagger delays for grouped elements */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+  .stagger-5 { transition-delay: 0.5s; }
+  .stagger-6 { transition-delay: 0.6s; }
+
+  /* Gold decorative rule */
+  .gold-rule {
+    @apply mx-auto;
+    height: 2px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, #E8B86D, transparent);
+  }
+
+  /* Warm gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #C1553D 0%, #E8B86D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -12px rgba(193, 85, 61, 0.15),
+                0 8px 20px -8px rgba(232, 184, 109, 0.2);
+  }
+
+  /* Animated underline for links */
+  .animated-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #E8B86D;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  .animated-underline:hover::after {
+    width: 100%;
+    left: 0;
+  }
+
+  /* Form field focus animation */
+  .form-field {
+    @apply w-full bg-white/60 border-b-2 border-warm-muted/30 px-4 py-3 font-sans text-warm-dark;
+    @apply transition-colors duration-300;
+    outline: none;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .form-field:focus {
+    @apply border-b-terracotta bg-white/80;
+  }
+
+  .form-field::placeholder {
+    @apply text-warm-muted;
+  }
+}
+
+@layer utilities {
+  /* Backdrop blur for glassmorphism */
+  .glass {
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    background: rgba(251, 247, 242, 0.8);
+  }
+
+  .glass-strong {
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    background: rgba(251, 247, 242, 0.9);
+  }
+}
+
+/* View Transitions customization */
+::view-transition-old(root) {
+  animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import CTASection from '../components/CTASection.astro';
+---
+
+<Layout title="About" description="Meet Jules — I bring joy, efficiency, and strength into spaces that feel chaotic. Compassionate home organizing in the Greater Tacoma Area.">
+
+  <!-- ===== HERO / INTRO ===== -->
+  <section class="bg-cream py-20 md:py-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <!-- Text (wider column) -->
+        <div class="lg:col-span-7 lg:pr-8">
+          <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">About</span>
+          <h1 class="font-playfair text-4xl md:text-5xl lg:text-6xl text-warm-dark leading-[1.1] mb-8 reveal stagger-1">
+            Hi, I'm <em class="font-cormorant italic text-terracotta not-italic">Jules.</em>
+          </h1>
+
+          <div class="space-y-5 text-lg text-warm leading-relaxed">
+            <p class="reveal stagger-2">
+              I believe there is peace on the other side of overwhelm.
+            </p>
+            <p class="reveal stagger-3">
+              I've seen how clutter can weigh on a person — not just physically, but emotionally. And I also know what it feels like to need someone steady and hopeful to help you move forward.
+            </p>
+            <p class="reveal stagger-4">
+              That's where I come in.
+            </p>
+            <p class="reveal stagger-5">
+              I bring joy, efficiency, and strength into spaces that feel chaotic. I'm not afraid of hard work or heavy lifting (thank you, CrossFit). I make quick decisions when you feel stuck. I create systems that are simple and sustainable.
+            </p>
+          </div>
+        </div>
+
+        <!-- Portrait placeholder (asymmetric) -->
+        <div class="lg:col-span-5 reveal-right">
+          <div class="relative lg:mt-12">
+            <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-warm-dark/10">
+              <div class="w-full h-full bg-gradient-to-br from-terracotta/10 via-gold-pale to-cream flex items-center justify-center">
+                <div class="text-center p-8">
+                  <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-terracotta/10 flex items-center justify-center">
+                    <svg class="w-12 h-12 text-terracotta/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  <p class="font-cormorant text-xl italic text-warm-muted">Your portrait here</p>
+                  <p class="text-sm text-warm-muted/60 mt-1">A warm, confident headshot</p>
+                </div>
+              </div>
+            </div>
+            <!-- Decorative offset frame -->
+            <div class="absolute -bottom-4 -left-4 w-full h-full rounded-2xl border-2 border-terracotta/20 -z-10"></div>
+            <!-- Gold accent dot -->
+            <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gold/60"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider variant="wave2" toColor="#FFFFFF" />
+
+  <!-- ===== PULL QUOTE + VALUES ===== -->
+  <section class="bg-white py-20 md:py-28">
+    <div class="max-w-5xl mx-auto px-6">
+      <!-- Pull quote -->
+      <div class="relative max-w-3xl mx-auto text-center mb-20">
+        <!-- Decorative sun rays behind quote -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.07]">
+          <div class="w-[400px] h-[400px] relative">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div
+                class="absolute top-1/2 left-1/2 w-[1px] h-32 origin-bottom -translate-x-1/2"
+                style={`transform: translateX(-50%) rotate(${i * 30}deg); background: linear-gradient(to top, #E8B86D, transparent);`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div class="relative reveal">
+          <p class="font-playfair text-2xl md:text-3xl text-warm-dark leading-relaxed mb-3">
+            Most importantly, I create a
+          </p>
+          <p class="font-playfair text-3xl md:text-4xl text-terracotta leading-relaxed">
+            judgment-free environment.
+          </p>
+        </div>
+      </div>
+
+      <!-- Values grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div class="text-center p-8 reveal stagger-1">
+          <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-gold-pale flex items-center justify-center">
+            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-warm-dark mb-2">Seen, Not Shamed</h3>
+          <p class="text-warm">My clients feel understood from the very first moment. I see possibility, not mess.</p>
+        </div>
+
+        <div class="text-center p-8 reveal stagger-2">
+          <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-gold-pale flex items-center justify-center">
+            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-warm-dark mb-2">Supported, Not Criticized</h3>
+          <p class="text-warm">Every decision is yours. I'm here to guide, encourage, and make the process feel easy.</p>
+        </div>
+
+        <div class="text-center p-8 reveal stagger-3">
+          <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-gold-pale flex items-center justify-center">
+            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="font-playfair text-xl text-warm-dark mb-2">Empowered, Not Embarrassed</h3>
+          <p class="text-warm">You'll walk away feeling confident, capable, and in control of your own space.</p>
+        </div>
+      </div>
+
+      <!-- Closing statement -->
+      <div class="max-w-2xl mx-auto text-center reveal">
+        <div class="gold-rule mb-8"></div>
+        <p class="text-lg text-warm leading-relaxed mb-2">I don't just organize rooms.</p>
+        <p class="font-cormorant text-2xl md:text-3xl italic text-terracotta leading-relaxed mb-6">
+          I help restore peace, clarity, and confidence in your home.
+        </p>
+        <p class="text-lg text-warm">
+          If your space feels overwhelming right now — I promise you, there is hope.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <CTASection
+    headline="Let's Work Together"
+    subtext="Your peaceful home starts with one conversation."
+    buttonText="Work With Me"
+    buttonHref="/contact"
+    variant="warm"
+  />
+
+</Layout>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  number: number;
+  title: string;
+  description: string;
+  isLast?: boolean;
+}
+
+const { number, title, description, isLast = false } = Astro.props;
+---
+
+<div class:list={['relative flex flex-col items-center text-center reveal', `stagger-${number}`]}>
+  <!-- Connector line (hidden on last item) -->
+  {!isLast && (
+    <div class="hidden md:block absolute top-10 left-[calc(50%+40px)] w-[calc(100%-80px)] h-[2px]">
+      <div class="w-full h-full bg-gradient-to-r from-gold to-gold-light"></div>
+    </div>
+  )}
+
+  <!-- Number circle -->
+  <div class="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center mb-6 shadow-lg shadow-gold/20">
+    <span class="font-playfair text-2xl font-bold text-warm-dark">{number}</span>
+  </div>
+
+  <!-- Content -->
+  <h3 class="font-playfair text-xl md:text-2xl text-warm-dark mb-3">{title}</h3>
+  <p class="text-warm leading-relaxed max-w-xs">{description}</p>
+</div>
