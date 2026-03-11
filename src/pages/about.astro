@@ -6,6 +6,7 @@ import SectionDivider from '../components/SectionDivider.astro';
 import CTASection from '../components/CTASection.astro';
 import portraitPhoto from '../assets/organizing-linen-closet.jpg';
 import memoriesPhoto from '../assets/downsizing-memories.jpg';
+import messyCloset from '../assets/jamesthethomas5-HXVMKvaPNqg-unsplash.jpg';
 ---
 
 <Layout title="About" description="Meet Jules — I bring joy, efficiency, and strength into spaces that feel chaotic. Compassionate home organizing in the Greater Tacoma Area.">
@@ -86,6 +87,17 @@ import memoriesPhoto from '../assets/downsizing-memories.jpg';
             judgment-free environment.
           </p>
         </div>
+      </div>
+
+      <!-- Small accent image -->
+      <div class="mx-auto mb-14 max-w-[200px] aspect-[3/4] rounded-xl overflow-hidden shadow-lg shadow-warm-dark/10 reveal">
+        <Image
+          src={messyCloset}
+          alt="A cluttered closet — the starting point for transformation"
+          class="w-full h-full object-cover"
+          widths={[200, 400]}
+          sizes="200px"
+        />
       </div>
 
       <!-- Values grid -->
