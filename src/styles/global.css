@@ -158,6 +158,52 @@
     left: 0;
   }
 
+  /* Intake form — custom checkboxes */
+  .intake-check {
+    @apply appearance-none w-5 h-5 border-2 border-warm-muted/30 rounded cursor-pointer flex-shrink-0;
+    @apply transition-all duration-200;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .intake-check:checked {
+    @apply border-terracotta bg-terracotta;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px;
+  }
+
+  .intake-check:hover {
+    @apply border-gold;
+  }
+
+  /* Intake form — custom radio buttons */
+  .intake-radio {
+    @apply appearance-none w-5 h-5 border-2 border-warm-muted/30 rounded-full cursor-pointer flex-shrink-0;
+    @apply transition-all duration-200;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .intake-radio:checked {
+    @apply border-terracotta;
+    background-color: white;
+    box-shadow: inset 0 0 0 4px #C1553D;
+  }
+
+  .intake-radio:hover {
+    @apply border-gold;
+  }
+
+  /* Multi-step form */
+  .form-step {
+    display: none;
+  }
+
+  .form-step.active {
+    display: block;
+    animation: stepFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   /* Form field focus animation */
   .form-field {
     @apply w-full bg-white/60 border-b-2 border-warm-muted/30 px-4 py-3 font-sans text-warm-dark;
@@ -207,4 +253,9 @@
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes stepFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }

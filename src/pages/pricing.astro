@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import PricingCard from '../components/PricingCard.astro';
 import SectionDivider from '../components/SectionDivider.astro';
 import CTASection from '../components/CTASection.astro';
+import closetRack from '../assets/alyssa-strohmann-TS--uNw-JqE-unsplash.jpg';
 ---
 
 <Layout title="Pricing" description="Clear pricing for home organization services. Starting at $40/hour with no surprises. Serving the Greater Tacoma Area.">
@@ -125,9 +127,18 @@ import CTASection from '../components/CTASection.astro';
     <div class="max-w-4xl mx-auto px-6">
       <div class="text-center mb-14">
         <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">Every session includes</span>
-        <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark reveal stagger-1">
+        <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark mb-8 reveal stagger-1">
           What's Included
         </h2>
+        <div class="mx-auto max-w-xs aspect-[3/2] rounded-xl overflow-hidden shadow-lg shadow-warm-dark/10 reveal stagger-2">
+          <Image
+            src={closetRack}
+            alt="A beautifully curated closet with warm-toned clothing"
+            class="w-full h-full object-cover"
+            widths={[300, 500]}
+            sizes="320px"
+          />
+        </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-14">

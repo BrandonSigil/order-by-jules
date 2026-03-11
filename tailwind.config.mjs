@@ -36,8 +36,8 @@ export default {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         'slide-left': 'slideLeft 0.8s ease-out forwards',
         'slide-right': 'slideRight 0.8s ease-out forwards',
-        'sun-rise': 'sunRise 1.5s ease-out forwards',
-        'ray-spread': 'raySpread 2s ease-out forwards',
+        'glow-in': 'glowIn 2s ease-out forwards',
+        'glow-breathe': 'glowBreathe 6s 2.5s ease-in-out infinite',
         'pulse-warm': 'pulseWarm 3s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
       },
@@ -58,13 +58,13 @@ export default {
           '0%': { opacity: '0', transform: 'translateX(-40px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
-        sunRise: {
-          '0%': { opacity: '0', transform: 'translateY(40px) scale(0.8)' },
-          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+        glowIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
-        raySpread: {
-          '0%': { opacity: '0', transform: 'scale(0.5) rotate(-10deg)' },
-          '100%': { opacity: '0.6', transform: 'scale(1) rotate(0deg)' },
+        glowBreathe: {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '0.85', transform: 'scale(1.03)' },
         },
         pulseWarm: {
           '0%, 100%': { opacity: '0.4' },

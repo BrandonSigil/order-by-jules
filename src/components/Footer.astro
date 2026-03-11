@@ -1,4 +1,6 @@
 ---
+import logo from '../assets/main-logo.svg';
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -15,7 +17,7 @@ const currentYear = new Date().getFullYear();
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
         <!-- Brand column -->
         <div>
-          <img src="/images/logo.png" alt="Order by Jules" class="h-16 w-auto mb-4 brightness-0 invert opacity-90" />
+          <img src={logo.src} alt="Order by Jules" class="h-16 w-auto mb-4 brightness-0 invert opacity-90" />
           <p class="font-cormorant text-xl italic text-gold-light leading-relaxed">
             "Joyfully restoring peace, one room at a time."
           </p>

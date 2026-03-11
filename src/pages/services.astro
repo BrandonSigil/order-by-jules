@@ -1,8 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import SectionDivider from '../components/SectionDivider.astro';
 import CTASection from '../components/CTASection.astro';
+import kitchenDrawer from '../assets/kitchen-drawer.jpg';
+import movingBoxes from '../assets/moving-boxes.jpg';
+import downsizingPlanning from '../assets/downsizing-planning.jpg';
+import cleanKitchen from '../assets/callum-hill-zILpNroX12o-unsplash.jpg';
 ---
 
 <Layout title="Services" description="Home organization, moving support, and downsizing services in the Greater Tacoma Area. Decluttering, packing, and organizing with joy.">
@@ -29,16 +34,13 @@ import CTASection from '../components/CTASection.astro';
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-28">
         <div class="reveal-left">
           <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl shadow-warm-dark/10">
-            <div class="w-full h-full bg-gradient-to-br from-gold-pale/80 via-cream to-sage-light/40 flex items-center justify-center">
-              <div class="text-center p-8">
-                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
-                  <svg class="w-10 h-10 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                  </svg>
-                </div>
-                <p class="font-cormorant text-xl italic text-warm-muted">Photo: organized kitchen</p>
-              </div>
-            </div>
+            <Image
+              src={kitchenDrawer}
+              alt="An organized kitchen with neatly arranged utensils and bowls"
+              class="w-full h-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
 
@@ -84,16 +86,13 @@ import CTASection from '../components/CTASection.astro';
 
         <div class="order-1 lg:order-2 reveal-right">
           <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl shadow-warm-dark/10">
-            <div class="w-full h-full bg-gradient-to-br from-terracotta/5 via-gold-pale/60 to-cream flex items-center justify-center">
-              <div class="text-center p-8">
-                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-terracotta/10 flex items-center justify-center">
-                  <svg class="w-10 h-10 text-terracotta/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                  </svg>
-                </div>
-                <p class="font-cormorant text-xl italic text-warm-muted">Photo: packing & moving</p>
-              </div>
-            </div>
+            <Image
+              src={movingBoxes}
+              alt="Neatly labeled and organized moving boxes ready for a transition"
+              class="w-full h-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
       </div>
@@ -102,16 +101,13 @@ import CTASection from '../components/CTASection.astro';
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div class="reveal-left">
           <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl shadow-warm-dark/10">
-            <div class="w-full h-full bg-gradient-to-br from-sage-light/50 via-cream to-gold-pale/40 flex items-center justify-center">
-              <div class="text-center p-8">
-                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-sage/20 flex items-center justify-center">
-                  <svg class="w-10 h-10 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </div>
-                <p class="font-cormorant text-xl italic text-warm-muted">Photo: peaceful space</p>
-              </div>
-            </div>
+            <Image
+              src={downsizingPlanning}
+              alt="Two women working together to plan a downsizing transition"
+              class="w-full h-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
 
@@ -140,9 +136,18 @@ import CTASection from '../components/CTASection.astro';
     <div class="max-w-5xl mx-auto px-6">
       <div class="text-center mb-14">
         <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">Extras</span>
-        <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark reveal stagger-1">
+        <h2 class="font-playfair text-3xl md:text-4xl text-warm-dark mb-8 reveal stagger-1">
           Add-On Services
         </h2>
+        <div class="mx-auto max-w-xs aspect-[3/4] rounded-xl overflow-hidden shadow-lg shadow-warm-dark/10 reveal stagger-2">
+          <Image
+            src={cleanKitchen}
+            alt="A bright, organized kitchen with wooden shelves and fresh flowers"
+            class="w-full h-full object-cover"
+            widths={[300, 500]}
+            sizes="320px"
+          />
+        </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">

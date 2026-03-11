@@ -1,39 +1,87 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import SectionDivider from '../components/SectionDivider.astro';
 import ProcessStep from '../components/ProcessStep.astro';
 import CTASection from '../components/CTASection.astro';
+import julesPhoto from '../assets/jules.png';
+import clutterPhoto from '../assets/clutter.jpg';
+import organizedDrawer from '../assets/oragnized-drawer.jpg';
 ---
 
 <Layout title="Home">
 
   <!-- ===== HERO ===== -->
-  <section class="relative min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-cream">
-    <!-- Animated sunrise -->
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex flex-col items-center pointer-events-none hero-sunrise">
-      <!-- Sun rays -->
-      <div class="relative w-[500px] h-[500px] md:w-[700px] md:h-[700px] opacity-0 animate-ray-spread">
-        {Array.from({ length: 16 }).map((_, i) => (
-          <div
-            class="absolute bottom-1/2 left-1/2 w-[2px] origin-bottom"
-            style={`
-              height: ${120 + Math.random() * 80}px;
-              transform: translateX(-50%) rotate(${-90 + i * (180 / 15)}deg);
-              background: linear-gradient(to top, rgba(232, 184, 109, 0.4), transparent);
-            `}
-          />
-        ))}
+  <section class="relative flex items-center justify-center overflow-hidden bg-cream">
+
+    <!-- Warm light atmosphere — layered gradients, no hard shapes -->
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+
+      <!-- Layer 1: Wide warm band across the bottom -->
+      <div class="absolute inset-x-0 bottom-0 h-[60%] opacity-0 animate-glow-in"
+        style="background: linear-gradient(to top, rgba(245, 213, 160, 0.35), rgba(245, 213, 160, 0.1) 50%, transparent 100%);"
+      ></div>
+
+      <!-- Layer 2: Large diffused radial warmth from bottom-center -->
+      <div class="absolute inset-x-0 bottom-0 h-full opacity-0 animate-glow-in" style="animation-delay: 0.2s;">
+        <div class="absolute bottom-0 left-1/2 w-[140vw] md:w-[100vw] aspect-square" style="transform: translate(-50%, 60%);">
+          <div class="w-full h-full rounded-full"
+            style="background: radial-gradient(circle, rgba(232, 184, 109, 0.2) 0%, rgba(245, 213, 160, 0.12) 30%, transparent 65%);"
+          ></div>
+        </div>
       </div>
-      <!-- Sun orb -->
-      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[30%] w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full opacity-0 animate-sun-rise"
-        style="background: radial-gradient(circle at 50% 60%, #F5D5A0, #E8B86D 40%, rgba(232, 184, 109, 0.2) 70%, transparent 100%);"
-      >
+
+      <!-- Layer 3: Tighter warm core — the brightest part of the "light source" -->
+      <div class="absolute inset-x-0 bottom-0 h-full opacity-0 animate-glow-in" style="animation-delay: 0.5s;">
+        <div class="absolute bottom-0 left-1/2 w-[90vw] md:w-[60vw] aspect-square" style="transform: translate(-50%, 55%);">
+          <div class="w-full h-full rounded-full animate-glow-breathe"
+            style="background: radial-gradient(circle, rgba(232, 184, 109, 0.25) 0%, rgba(245, 213, 160, 0.1) 35%, transparent 60%);"
+          ></div>
+        </div>
       </div>
+
+      <!-- Layer 4: Subtle light rays via conic gradient — barely visible, atmospheric -->
+      <div class="absolute inset-x-0 bottom-0 h-full opacity-0 animate-glow-in" style="animation-delay: 0.8s;">
+        <div class="absolute bottom-0 left-1/2 w-[120vw] md:w-[80vw] aspect-square" style="transform: translate(-50%, 50%);">
+          <div class="w-full h-full"
+            style="
+              background: conic-gradient(
+                from 180deg,
+                transparent 0deg,
+                rgba(245, 213, 160, 0.06) 8deg,
+                transparent 16deg,
+                transparent 28deg,
+                rgba(232, 184, 109, 0.05) 34deg,
+                transparent 40deg,
+                transparent 55deg,
+                rgba(245, 213, 160, 0.07) 62deg,
+                transparent 70deg,
+                transparent 82deg,
+                rgba(232, 184, 109, 0.04) 88deg,
+                transparent 95deg,
+                transparent 108deg,
+                rgba(245, 213, 160, 0.06) 114deg,
+                transparent 121deg,
+                transparent 135deg,
+                rgba(232, 184, 109, 0.05) 140deg,
+                transparent 147deg,
+                transparent 160deg,
+                rgba(245, 213, 160, 0.06) 166deg,
+                transparent 173deg,
+                transparent 180deg
+              );
+              mask-image: radial-gradient(circle, white 0%, transparent 65%);
+              -webkit-mask-image: radial-gradient(circle, white 0%, transparent 65%);
+            "
+          ></div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Hero content -->
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-20 pb-32 md:pb-40">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-8 pb-14 md:pt-10 md:pb-16">
       <div class="mb-6 opacity-0 animate-fade-up" style="animation-delay: 0.3s;">
         <span class="inline-block font-cormorant text-lg md:text-xl italic text-warm tracking-wide">
           Order by Jules
@@ -57,41 +105,47 @@ import CTASection from '../components/CTASection.astro';
       </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style="animation-delay: 1.5s;">
-      <div class="w-6 h-10 rounded-full border-2 border-warm-muted/40 flex justify-center pt-2">
-        <div class="w-1 h-3 bg-warm-muted/40 rounded-full animate-bounce"></div>
-      </div>
-    </div>
   </section>
-
-  <SectionDivider variant="wave1" toColor="#FFFFFF" />
 
   <!-- ===== SECTION 1 — THE PROBLEM ===== -->
   <section class="bg-white py-20 md:py-28">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="max-w-2xl">
-        <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight mb-8 reveal">
-          Feeling <em class="font-cormorant italic text-terracotta not-italic">Overwhelmed</em> in Your Own Home?
-        </h2>
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight mb-8 reveal">
+            Feeling <em class="font-cormorant italic text-terracotta not-italic">Overwhelmed</em> in Your Own Home?
+          </h2>
 
-        <div class="space-y-4 mb-10">
-          <p class="text-lg text-warm reveal stagger-1">Maybe the clutter keeps piling up.</p>
-          <p class="text-lg text-warm reveal stagger-2">Maybe you don't know where to start.</p>
-          <p class="text-lg text-warm reveal stagger-3">Maybe you're preparing to move or downsize.</p>
-          <p class="text-lg text-warm reveal stagger-4">Maybe you feel embarrassed inviting people over.</p>
+          <div class="space-y-4 mb-10">
+            <p class="text-lg text-warm reveal stagger-1">Maybe the clutter keeps piling up.</p>
+            <p class="text-lg text-warm reveal stagger-2">Maybe you don't know where to start.</p>
+            <p class="text-lg text-warm reveal stagger-3">Maybe you're preparing to move or downsize.</p>
+            <p class="text-lg text-warm reveal stagger-4">Maybe you feel embarrassed inviting people over.</p>
+          </div>
+
+          <div class="space-y-2 mb-8 reveal stagger-5">
+            <p class="text-lg text-warm-dark font-medium">You don't need judgment.</p>
+            <p class="text-lg text-warm-dark font-medium">You don't need perfection.</p>
+          </div>
+
+          <div class="reveal stagger-6">
+            <div class="gold-rule !mx-0 mb-4"></div>
+            <p class="font-cormorant text-2xl md:text-3xl italic text-terracotta leading-relaxed">
+              You need clarity, momentum, and someone who sees hope in your space.
+            </p>
+          </div>
         </div>
 
-        <div class="space-y-2 mb-8 reveal stagger-5">
-          <p class="text-lg text-warm-dark font-medium">You don't need judgment.</p>
-          <p class="text-lg text-warm-dark font-medium">You don't need perfection.</p>
-        </div>
-
-        <div class="reveal stagger-6">
-          <div class="gold-rule !mx-0 mb-4"></div>
-          <p class="font-cormorant text-2xl md:text-3xl italic text-terracotta leading-relaxed">
-            You need clarity, momentum, and someone who sees hope in your space.
-          </p>
+        <div class="reveal-right">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl shadow-warm-dark/10">
+            <Image
+              src={clutterPhoto}
+              alt="A cluttered coffee table — the kind of overwhelm we help with"
+              class="w-full h-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -139,17 +193,13 @@ import CTASection from '../components/CTASection.astro';
         <div class="reveal-right">
           <div class="relative">
             <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-warm-dark/10">
-              <div class="w-full h-full bg-gradient-to-br from-gold-pale via-gold-light/40 to-cream flex items-center justify-center">
-                <div class="text-center p-8">
-                  <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gold/20 flex items-center justify-center">
-                    <svg class="w-10 h-10 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <p class="font-cormorant text-xl italic text-warm-muted">Your photo here</p>
-                  <p class="text-sm text-warm-muted/60 mt-1">Organizing in action</p>
-                </div>
-              </div>
+              <Image
+                src={julesPhoto}
+                alt="Jules and her family"
+                class="w-full h-full object-cover"
+                widths={[400, 600, 800]}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
             <!-- Decorative offset element -->
             <div class="absolute -bottom-4 -right-4 w-full h-full rounded-2xl border-2 border-gold/30 -z-10"></div>
@@ -166,9 +216,18 @@ import CTASection from '../components/CTASection.astro';
     <div class="max-w-5xl mx-auto px-6">
       <div class="text-center mb-16">
         <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">How it works</span>
-        <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight reveal stagger-1">
+        <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight mb-8 reveal stagger-1">
           A Simple <em class="font-cormorant italic text-terracotta not-italic">3-Step</em> Process
         </h2>
+        <div class="mx-auto max-w-xs aspect-[3/2] rounded-xl overflow-hidden shadow-lg shadow-warm-dark/10 reveal stagger-2">
+          <Image
+            src={organizedDrawer}
+            alt="A beautifully organized drawer with neatly folded clothes"
+            class="w-full h-full object-cover"
+            widths={[300, 500]}
+            sizes="320px"
+          />
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">

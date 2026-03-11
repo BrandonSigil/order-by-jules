@@ -1,5 +1,5 @@
 ---
-const currentPath = Astro.url.pathname;
+import logo from '../assets/main-logo.svg';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -24,7 +24,7 @@ const navLinks = [
     <!-- Logo -->
     <a href="/" class="flex-shrink-0 relative z-10">
       <img
-        src="/images/logo.png"
+        src={logo.src}
         alt="Order by Jules"
         class="h-14 md:h-16 w-auto"
       />
@@ -36,12 +36,8 @@ const navLinks = [
         <li>
           <a
             href={link.href}
-            class:list={[
-              'font-sans text-sm tracking-widest uppercase transition-colors duration-300 animated-underline',
-              currentPath === link.href
-                ? 'text-terracotta font-semibold'
-                : 'text-warm hover:text-terracotta',
-            ]}
+            data-nav-link
+            class="font-sans text-sm tracking-widest uppercase transition-colors duration-300 animated-underline text-warm hover:text-terracotta"
           >
             {link.label}
           </a>
@@ -66,7 +62,7 @@ const navLinks = [
     >
       <span class="hamburger-line w-6 h-0.5 bg-warm-dark transition-all duration-300 origin-center"></span>
       <span class="hamburger-line w-6 h-0.5 bg-warm-dark transition-all duration-300 origin-center"></span>
-      <span class="hamburger-line w-4 h-0.5 bg-warm-dark transition-all duration-300 origin-center ml-auto"></span>
+      <span class="hamburger-line w-4 h-0.5 bg-warm-dark transition-all duration-300 origin-center"></span>
     </button>
   </nav>
 
@@ -80,12 +76,8 @@ const navLinks = [
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class:list={[
-            'font-playfair text-3xl transition-colors duration-300',
-            currentPath === link.href
-              ? 'text-terracotta'
-              : 'text-warm-dark hover:text-terracotta',
-          ]}
+          data-nav-link-mobile
+          class="font-playfair text-3xl transition-colors duration-300 text-warm-dark hover:text-terracotta"
         >
           {link.label}
         </a>
@@ -133,6 +125,36 @@ const navLinks = [
 </style>
 
 <script>
+  function normalizePath(p: string) {
+    return p.replace(/\/+$/, '') || '/';
+  }
+
+  function updateActiveNav() {
+    const current = normalizePath(window.location.pathname);
+
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]').forEach((link) => {
+      const href = normalizePath(link.getAttribute('href') || '');
+      if (href === current) {
+        link.classList.add('text-terracotta', 'font-semibold');
+        link.classList.remove('text-warm');
+      } else {
+        link.classList.remove('text-terracotta', 'font-semibold');
+        link.classList.add('text-warm');
+      }
+    });
+
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-link-mobile]').forEach((link) => {
+      const href = normalizePath(link.getAttribute('href') || '');
+      if (href === current) {
+        link.classList.add('text-terracotta');
+        link.classList.remove('text-warm-dark');
+      } else {
+        link.classList.remove('text-terracotta');
+        link.classList.add('text-warm-dark');
+      }
+    });
+  }
+
   function initHeader() {
     const header = document.getElementById('site-header');
     const toggle = document.getElementById('menu-toggle');
@@ -166,6 +188,8 @@ const navLinks = [
     });
   }
 
+  updateActiveNav();
   initHeader();
+  document.addEventListener('astro:after-swap', updateActiveNav);
   document.addEventListener('astro:after-swap', initHeader);
 </script>

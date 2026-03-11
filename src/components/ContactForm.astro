@@ -1,148 +1,632 @@
 ---
 // Replace YOUR_FORM_ID with your actual Formspree form ID
 const formspreeEndpoint = 'https://formspree.io/f/YOUR_FORM_ID';
+
+const stepNames = [
+  'Contact Information',
+  'Your Space',
+  'Your Vision',
+  'Readiness & Goals',
+  'Logistics',
+  'Scheduling',
+  'Heart Check',
+  'Agreement',
+];
+
+const spaces = [
+  'Kitchen', 'Pantry', 'Closet', 'Bedroom', 'Garage',
+  'Playroom', 'Bathroom', 'Whole House', 'Preparing to Move', 'Downsizing',
+];
+
+const emotions = [
+  'Stress', 'Shame', 'Frustration', 'Anxiety',
+  'Numb', 'Hopeful', 'Ready for change',
+];
+
+const addons = [
+  'Move packing & unpacking',
+  'Donation drop-off service',
+  'Dump run assistance',
+  'Multi-room package pricing',
+];
 ---
 
 <form
   action={formspreeEndpoint}
   method="POST"
-  class="space-y-6"
   id="contact-form"
 >
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="relative">
-      <label for="name" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
-        Full Name
-      </label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        required
-        class="form-field"
-        placeholder="Your full name"
-      />
-    </div>
+  <input type="hidden" name="_subject" value="New Client Intake Form — Order by Jules" />
+  <div id="step-names" class="hidden" data-steps={JSON.stringify(stepNames)}></div>
 
-    <div class="relative">
-      <label for="email" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
-        Email Address
-      </label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        required
-        class="form-field"
-        placeholder="you@email.com"
-      />
+  <!-- ===== PROGRESS BAR ===== -->
+  <div class="mb-10">
+    <div class="flex justify-between items-center mb-3">
+      <span class="text-xs sm:text-sm text-warm-muted font-sans tracking-wide uppercase">
+        Step <span id="step-current">1</span> of 8
+      </span>
+      <span class="text-xs sm:text-sm text-warm-dark font-sans font-medium" id="step-name">Contact Information</span>
+    </div>
+    <div class="h-2 bg-warm-muted/15 rounded-full overflow-hidden">
+      <div
+        class="h-full bg-gradient-to-r from-terracotta to-gold rounded-full transition-all duration-500 ease-out"
+        id="progress-bar"
+        style="width: 12.5%"
+      ></div>
     </div>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="relative">
-      <label for="phone" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
-        Phone Number
-      </label>
-      <input
-        type="tel"
-        id="phone"
-        name="phone"
-        class="form-field"
-        placeholder="(253) 555-0123"
-      />
-    </div>
+  <!-- ===== STEP 1: CONTACT INFORMATION ===== -->
+  <div data-step="1" class="form-step active">
+    <fieldset class="space-y-6">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+          <span class="font-playfair text-sm font-bold text-white">1</span>
+        </div>
+        <h3 class="font-playfair text-2xl text-warm-dark">Contact Information</h3>
+      </div>
 
-    <div class="relative">
-      <label for="address" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
-        Home Address
-      </label>
-      <input
-        type="text"
-        id="address"
-        name="address"
-        class="form-field"
-        placeholder="City, State"
-      />
-    </div>
-  </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="name" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">Full Name</label>
+          <input type="text" id="name" name="name" required class="form-field" placeholder="Your full name" />
+        </div>
+        <div>
+          <label for="phone" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="form-field" placeholder="(253) 555-0123" />
+        </div>
+      </div>
 
-  <div class="relative">
-    <label for="spaces" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
-      Space(s) Needing Help
-    </label>
-    <input
-      type="text"
-      id="spaces"
-      name="spaces"
-      class="form-field"
-      placeholder="e.g. Kitchen, master closet, garage"
-    />
-  </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="email" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">Email Address</label>
+          <input type="email" id="email" name="email" required class="form-field" placeholder="you@email.com" />
+        </div>
+        <div>
+          <label for="address" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">Home Address</label>
+          <input type="text" id="address" name="address" class="form-field" placeholder="City, State" />
+        </div>
+      </div>
 
-  <div class="relative">
-    <label for="goals" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
-      Brief Description of Your Goals
-    </label>
-    <textarea
-      id="goals"
-      name="goals"
-      rows="4"
-      class="form-field resize-none"
-      placeholder="Tell me about your space and what you'd like to achieve..."
-    ></textarea>
-  </div>
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">Preferred Method of Communication</p>
+        <div class="flex flex-wrap gap-x-6 gap-y-3">
+          {['Text', 'Phone', 'Email'].map(method => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="checkbox" name="communication" value={method} class="intake-check" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors">{method}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </fieldset>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="relative">
-      <label for="preferred-time" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
-        Preferred Session Time
-      </label>
-      <select id="preferred-time" name="preferred-time" class="form-field">
-        <option value="" disabled selected>Select a time preference</option>
-        <option value="morning">Morning (8am - 12pm)</option>
-        <option value="afternoon">Afternoon (12pm - 4pm)</option>
-        <option value="evening">Evening (4pm - 7pm)</option>
-        <option value="flexible">I'm flexible</option>
-      </select>
-    </div>
-
-    <div class="relative">
-      <label for="referral" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
-        How Did You Hear About Us?
-      </label>
-      <select id="referral" name="referral" class="form-field">
-        <option value="" disabled selected>Select one</option>
-        <option value="instagram">Instagram</option>
-        <option value="google">Google Search</option>
-        <option value="friend">Friend or Family</option>
-        <option value="nextdoor">Nextdoor</option>
-        <option value="other">Other</option>
-      </select>
+    <div class="flex justify-end pt-8 mt-8 border-t border-warm-muted/10">
+      <button type="button" data-action="next" class="inline-flex items-center gap-2 font-sans font-semibold tracking-wide uppercase rounded-full bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-lg hover:shadow-terracotta/15 transition-all duration-300 px-8 py-3 text-sm">
+        Continue
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
     </div>
   </div>
 
-  <div class="pt-4">
-    <button
-      type="submit"
-      class="w-full md:w-auto inline-flex items-center justify-center font-sans font-semibold tracking-wide uppercase rounded-full transition-all duration-400 relative overflow-hidden group bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-xl hover:shadow-terracotta/20 px-10 py-4 text-base"
-    >
-      <span class="relative z-10">Start My Peaceful Home Plan</span>
-      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
-    </button>
+  <!-- ===== STEP 2: TELL ME ABOUT YOUR SPACE ===== -->
+  <div data-step="2" class="form-step">
+    <fieldset class="space-y-7">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+          <span class="font-playfair text-sm font-bold text-white">2</span>
+        </div>
+        <h3 class="font-playfair text-2xl text-warm-dark">Tell Me About Your Space</h3>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">Which space(s) are you wanting help with?</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-3">
+          {spaces.map(space => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="checkbox" name="spaces" value={space} class="intake-check" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{space}</span>
+            </label>
+          ))}
+          <label class="flex items-center gap-2.5 cursor-pointer group">
+            <input type="checkbox" name="spaces" value="Other" class="intake-check" id="spaces-other-check" />
+            <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">Other</span>
+          </label>
+        </div>
+        <input type="text" name="spaces_other" id="spaces-other-text" class="form-field mt-3 hidden" placeholder="Please specify other space(s)" />
+      </div>
+
+      <div>
+        <label for="overwhelming" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
+          What is currently feeling overwhelming about this space?
+        </label>
+        <textarea id="overwhelming" name="overwhelming" rows="3" class="form-field resize-none" placeholder="Tell me what's been on your mind..."></textarea>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">How long has this space felt this way?</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-3">
+          {([
+            ['few-weeks', 'A few weeks'],
+            ['few-months', 'A few months'],
+            ['over-a-year', 'Over a year'],
+            ['longer', 'Longer than I want to admit'],
+          ] as const).map(([value, label]) => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="radio" name="duration" value={value} class="intake-radio" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="flex justify-between items-center pt-8 mt-8 border-t border-warm-muted/10">
+      <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <button type="button" data-action="next" class="inline-flex items-center gap-2 font-sans font-semibold tracking-wide uppercase rounded-full bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-lg hover:shadow-terracotta/15 transition-all duration-300 px-8 py-3 text-sm">
+        Continue
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 3: YOUR VISION ===== -->
+  <div data-step="3" class="form-step">
+    <fieldset class="space-y-7">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+          <span class="font-playfair text-sm font-bold text-white">3</span>
+        </div>
+        <h3 class="font-playfair text-2xl text-warm-dark">Your Vision</h3>
+      </div>
+
+      <div>
+        <label for="vision" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
+          If this space felt peaceful and functional, what would that look like to you?
+        </label>
+        <textarea id="vision" name="vision" rows="4" class="form-field resize-none" placeholder="Describe your ideal space..."></textarea>
+      </div>
+
+      <div>
+        <label for="daily-change" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
+          What would change in your daily life if this space worked better?
+        </label>
+        <textarea id="daily-change" name="daily_change" rows="4" class="form-field resize-none" placeholder="How would your day-to-day feel different?"></textarea>
+      </div>
+    </fieldset>
+
+    <div class="flex justify-between items-center pt-8 mt-8 border-t border-warm-muted/10">
+      <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <button type="button" data-action="next" class="inline-flex items-center gap-2 font-sans font-semibold tracking-wide uppercase rounded-full bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-lg hover:shadow-terracotta/15 transition-all duration-300 px-8 py-3 text-sm">
+        Continue
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 4: READINESS & GOALS ===== -->
+  <div data-step="4" class="form-step">
+    <fieldset class="space-y-7">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+          <span class="font-playfair text-sm font-bold text-white">4</span>
+        </div>
+        <h3 class="font-playfair text-2xl text-warm-dark">Readiness & Goals</h3>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">Are you ready to declutter and let go of items during our session?</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-3">
+          {([
+            ['ready', "Yes, I'm ready"],
+            ['need-help', "I'll need help deciding"],
+            ['not-sure', "I'm not sure yet"],
+          ] as const).map(([value, label]) => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="radio" name="readiness" value={value} class="intake-radio" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">On a scale of 1–10, how motivated are you to make changes?</p>
+        <p class="text-xs text-warm-muted mb-4">1 (overwhelmed) — 10 (very ready)</p>
+        <div class="flex flex-wrap gap-2.5">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
+            <label class="relative cursor-pointer">
+              <input type="radio" name="motivation" value={String(n)} class="peer sr-only" />
+              <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-warm-muted/30 flex items-center justify-center font-sans text-sm text-warm transition-all duration-200 peer-checked:border-terracotta peer-checked:bg-terracotta peer-checked:text-cream hover:border-gold bg-white/60">
+                {n}
+              </div>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <label for="emotional" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
+          Are there emotional attachments or sensitive items I should be aware of?
+        </label>
+        <textarea id="emotional" name="emotional_attachments" rows="3" class="form-field resize-none" placeholder="Anything you'd like me to know — no detail is too small..."></textarea>
+      </div>
+    </fieldset>
+
+    <div class="flex justify-between items-center pt-8 mt-8 border-t border-warm-muted/10">
+      <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <button type="button" data-action="next" class="inline-flex items-center gap-2 font-sans font-semibold tracking-wide uppercase rounded-full bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-lg hover:shadow-terracotta/15 transition-all duration-300 px-8 py-3 text-sm">
+        Continue
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 5: LOGISTICS ===== -->
+  <div data-step="5" class="form-step">
+    <fieldset class="space-y-7">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+          <span class="font-playfair text-sm font-bold text-white">5</span>
+        </div>
+        <h3 class="font-playfair text-2xl text-warm-dark">Logistics</h3>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">Do you have a deadline?</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-3">
+          {([
+            ['Listing home', 'listing'],
+            ['Moving date', 'moving'],
+            ['Event coming up', 'event'],
+            ['No deadline', 'none'],
+          ] as const).map(([label, id]) => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="checkbox" name="deadline" value={label} class="intake-check" id={`deadline-${id}`} />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{label}</span>
+            </label>
+          ))}
+        </div>
+        <div id="deadline-date-wrap" class="mt-4 hidden">
+          <label for="deadline-date" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">Target Date</label>
+          <input type="date" id="deadline-date" name="deadline_date" class="form-field" />
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">Will anyone else be involved in decision-making?</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-3">
+          {['Spouse', 'Parent', 'Roommate', 'Just me'].map(person => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="checkbox" name="decision_makers" value={person} class="intake-check" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{person}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">Do you have pets in the home?</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-3">
+          {(['Yes', 'No'] as const).map(label => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="radio" name="pets" value={label.toLowerCase()} class="intake-radio" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="flex justify-between items-center pt-8 mt-8 border-t border-warm-muted/10">
+      <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <button type="button" data-action="next" class="inline-flex items-center gap-2 font-sans font-semibold tracking-wide uppercase rounded-full bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-lg hover:shadow-terracotta/15 transition-all duration-300 px-8 py-3 text-sm">
+        Continue
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 6: INVESTMENT & SCHEDULING ===== -->
+  <div data-step="6" class="form-step">
+    <fieldset class="space-y-7">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+          <span class="font-playfair text-sm font-bold text-white">6</span>
+        </div>
+        <h3 class="font-playfair text-2xl text-warm-dark">Investment & Scheduling</h3>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">Preferred session time</p>
+        <div class="flex flex-col gap-3">
+          {([
+            ['weekday-mornings', 'Weekday mornings (9am–2pm)'],
+            ['evenings', 'Evenings (consult only)'],
+            ['weekends', 'Weekends (consult only)'],
+          ] as const).map(([value, label]) => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="radio" name="session_time" value={value} class="intake-radio" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors">{label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">How did you hear about Order by Jules?</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-3">
+          {['Instagram', 'Friend referral', 'Realtor', 'Gym', 'Church'].map(source => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="checkbox" name="referral" value={source} class="intake-check" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{source}</span>
+            </label>
+          ))}
+          <label class="flex items-center gap-2.5 cursor-pointer group">
+            <input type="checkbox" name="referral" value="Other" class="intake-check" id="referral-other-check" />
+            <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">Other</span>
+          </label>
+        </div>
+        <input type="text" name="referral_other" id="referral-other-text" class="form-field mt-4 hidden" placeholder="Please specify" />
+      </div>
+    </fieldset>
+
+    <div class="flex justify-between items-center pt-8 mt-8 border-t border-warm-muted/10">
+      <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <button type="button" data-action="next" class="inline-flex items-center gap-2 font-sans font-semibold tracking-wide uppercase rounded-full bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-lg hover:shadow-terracotta/15 transition-all duration-300 px-8 py-3 text-sm">
+        Continue
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 7: HEART CHECK ===== -->
+  <div data-step="7" class="form-step">
+    <fieldset class="space-y-7">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+          <span class="font-playfair text-sm font-bold text-white">7</span>
+        </div>
+        <h3 class="font-playfair text-2xl text-warm-dark">Heart Check</h3>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">What emotions do you currently feel when you walk into this space?</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-3">
+          {emotions.map(emotion => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="checkbox" name="emotions" value={emotion} class="intake-check" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{emotion}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <label for="desired-feeling" class="block text-sm font-sans font-medium text-warm-dark mb-2 tracking-wide uppercase">
+          What would you love to feel instead?
+        </label>
+        <textarea id="desired-feeling" name="desired_feeling" rows="4" class="form-field resize-none" placeholder="Describe the feeling you're hoping for..."></textarea>
+      </div>
+    </fieldset>
+
+    <div class="flex justify-between items-center pt-8 mt-8 border-t border-warm-muted/10">
+      <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <button type="button" data-action="next" class="inline-flex items-center gap-2 font-sans font-semibold tracking-wide uppercase rounded-full bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-lg hover:shadow-terracotta/15 transition-all duration-300 px-8 py-3 text-sm">
+        Continue
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 8: AGREEMENT + ADD-ONS ===== -->
+  <div data-step="8" class="form-step">
+    <fieldset class="space-y-6">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center flex-shrink-0">
+          <span class="font-playfair text-sm font-bold text-white">8</span>
+        </div>
+        <h3 class="font-playfair text-2xl text-warm-dark">Agreement</h3>
+      </div>
+
+      <div class="bg-white/60 rounded-xl p-5 sm:p-6 border border-gold-light/20">
+        <p class="font-cormorant text-lg italic text-warm-dark mb-3">Order by Jules provides:</p>
+        <ul class="space-y-2.5 text-warm text-sm">
+          <li class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-sage mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>A free consultation</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-sage mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Product recommendations</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-sage mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Hands-on organizing support</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-sage mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>A judgment-free, hope-filled experience</span>
+          </li>
+        </ul>
+        <div class="mt-4 pt-4 border-t border-warm-muted/15">
+          <p class="text-warm text-sm">
+            Rates start at <span class="font-semibold text-warm-dark">$40/hour</span> (2-hour minimum). Flat rates available depending on scope.
+          </p>
+        </div>
+      </div>
+
+      <label class="flex items-start gap-2.5 cursor-pointer group">
+        <input type="checkbox" name="agreement" value="yes" required class="intake-check mt-0.5" />
+        <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">
+          I understand pricing and am ready to schedule a consultation.
+        </span>
+      </label>
+    </fieldset>
+
+    <div class="my-8 h-px bg-gradient-to-r from-transparent via-gold-light/40 to-transparent"></div>
+
+    <!-- Optional Add-Ons (part of step 8) -->
+    <fieldset class="space-y-6">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-9 h-9 rounded-full bg-cream border-2 border-gold-light/40 flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-playfair text-xl text-warm-dark">Optional Add-Ons</h3>
+          <p class="text-xs text-warm-muted mt-0.5">Not required — just let me know if you're interested</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-sans font-medium text-warm-dark mb-3 tracking-wide uppercase">Would you like information about:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
+          {addons.map(addon => (
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="checkbox" name="addons" value={addon} class="intake-check" />
+              <span class="text-warm group-hover:text-warm-dark transition-colors text-sm">{addon}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="flex justify-between items-center pt-8 mt-8 border-t border-warm-muted/10">
+      <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <button type="submit" class="inline-flex items-center justify-center font-sans font-semibold tracking-wide uppercase rounded-full transition-all duration-400 relative overflow-hidden group bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-xl hover:shadow-terracotta/20 px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base">
+        <span class="relative z-10">Schedule My Free Consultation</span>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+      </button>
+    </div>
   </div>
 </form>
 
 <script>
-  function initForm() {
+  function initIntakeForm() {
     const form = document.getElementById('contact-form') as HTMLFormElement;
     if (!form) return;
 
+    let currentStep = 1;
+    const totalSteps = 8;
+    const stepNames: string[] = JSON.parse(
+      document.getElementById('step-names')?.dataset.steps || '[]'
+    );
+    const progressBar = document.getElementById('progress-bar') as HTMLElement;
+    const stepCurrentEl = document.getElementById('step-current') as HTMLElement;
+    const stepNameEl = document.getElementById('step-name') as HTMLElement;
+
+    function goToStep(step: number) {
+      form.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+      const target = form.querySelector(`[data-step="${step}"]`);
+      if (target) target.classList.add('active');
+
+      currentStep = step;
+      if (progressBar) progressBar.style.width = `${(step / totalSteps) * 100}%`;
+      if (stepCurrentEl) stepCurrentEl.textContent = String(step);
+      if (stepNameEl) stepNameEl.textContent = stepNames[step - 1] || '';
+
+      setTimeout(() => {
+        const top = form.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, 50);
+    }
+
+    function validateCurrentStep(): boolean {
+      const stepEl = form.querySelector(`[data-step="${currentStep}"]`);
+      if (!stepEl) return true;
+      const fields = stepEl.querySelectorAll('[required]') as NodeListOf<HTMLInputElement>;
+      for (const field of Array.from(fields)) {
+        if (!field.reportValidity()) return false;
+      }
+      return true;
+    }
+
+    form.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('[data-action]') as HTMLElement;
+      if (!btn) return;
+      if (btn.dataset.action === 'next' && currentStep < totalSteps) {
+        if (validateCurrentStep()) goToStep(currentStep + 1);
+      } else if (btn.dataset.action === 'back' && currentStep > 1) {
+        goToStep(currentStep - 1);
+      }
+    });
+
+    function setupOtherToggle(checkId: string, textId: string) {
+      const check = document.getElementById(checkId) as HTMLInputElement;
+      const text = document.getElementById(textId) as HTMLInputElement;
+      if (!check || !text) return;
+      check.addEventListener('change', () => {
+        text.classList.toggle('hidden', !check.checked);
+        if (!check.checked) text.value = '';
+        else text.focus();
+      });
+    }
+
+    setupOtherToggle('spaces-other-check', 'spaces-other-text');
+    setupOtherToggle('referral-other-check', 'referral-other-text');
+
+    const deadlineDateWrap = document.getElementById('deadline-date-wrap');
+    const deadlineNone = document.getElementById('deadline-none') as HTMLInputElement;
+    const deadlineChecks = form.querySelectorAll('input[name="deadline"]') as NodeListOf<HTMLInputElement>;
+
+    function updateDeadlineVisibility() {
+      if (!deadlineDateWrap) return;
+      const hasSpecificDeadline = Array.from(deadlineChecks).some(
+        cb => cb.checked && cb.value !== 'No deadline'
+      );
+      deadlineDateWrap.classList.toggle('hidden', !hasSpecificDeadline);
+    }
+
+    deadlineChecks.forEach(cb => {
+      cb.addEventListener('change', () => {
+        if (cb.value === 'No deadline' && cb.checked) {
+          deadlineChecks.forEach(other => { if (other !== cb) other.checked = false; });
+        } else if (cb.checked && deadlineNone) {
+          deadlineNone.checked = false;
+        }
+        updateDeadlineVisibility();
+      });
+    });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (!validateCurrentStep()) return;
+
       const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const originalText = btn.querySelector('span')!.textContent;
-      btn.querySelector('span')!.textContent = 'Sending...';
+      const btnText = btn.querySelector('span')!;
+      const originalText = btnText.textContent;
+      btnText.textContent = 'Sending...';
       btn.disabled = true;
 
       try {
@@ -153,29 +637,32 @@ const formspreeEndpoint = 'https://formspree.io/f/YOUR_FORM_ID';
         });
 
         if (response.ok) {
-          btn.querySelector('span')!.textContent = 'Message Sent!';
+          btnText.textContent = 'Form Submitted — Thank You!';
           btn.classList.remove('bg-terracotta', 'hover:bg-terracotta-dark');
           btn.classList.add('bg-sage');
           form.reset();
+          document.querySelectorAll('#spaces-other-text, #referral-other-text, #deadline-date-wrap')
+            .forEach(el => el.classList.add('hidden'));
           setTimeout(() => {
-            btn.querySelector('span')!.textContent = originalText;
+            btnText.textContent = originalText;
             btn.classList.remove('bg-sage');
             btn.classList.add('bg-terracotta', 'hover:bg-terracotta-dark');
             btn.disabled = false;
-          }, 3000);
+            goToStep(1);
+          }, 4000);
         } else {
-          throw new Error('Form submission failed');
+          throw new Error('Submission failed');
         }
       } catch {
-        btn.querySelector('span')!.textContent = 'Something went wrong — please try again';
+        btnText.textContent = 'Something went wrong — please try again';
         btn.disabled = false;
         setTimeout(() => {
-          btn.querySelector('span')!.textContent = originalText;
+          btnText.textContent = originalText;
         }, 3000);
       }
     });
   }
 
-  initForm();
-  document.addEventListener('astro:after-swap', initForm);
+  initIntakeForm();
+  document.addEventListener('astro:after-swap', initIntakeForm);
 </script>
