@@ -32,7 +32,7 @@ const { title, price, detail, featured = false, delay = 0 } = Astro.props;
 
   <div class="mb-4">
     <span class:list={[
-      'font-playfair text-4xl md:text-5xl font-bold',
+      'font-playfair text-4xl md:text-[2.5rem] font-bold whitespace-nowrap',
       featured ? 'text-gold-light' : 'gradient-text',
     ]}>
       {price}

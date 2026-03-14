@@ -1,6 +1,6 @@
 ---
-// Replace YOUR_FORM_ID with your actual Formspree form ID
-const formspreeEndpoint = 'https://formspree.io/f/YOUR_FORM_ID';
+const staticFormsEndpoint = 'https://api.staticforms.dev/submit';
+const staticFormsApiKey = 'sf_k2dl9ek8mk677m4hdcncn314';
 
 const stepNames = [
   'Contact Information',
@@ -32,11 +32,14 @@ const addons = [
 ---
 
 <form
-  action={formspreeEndpoint}
+  action={staticFormsEndpoint}
   method="POST"
   id="contact-form"
 >
-  <input type="hidden" name="_subject" value="New Client Intake Form — Order by Jules" />
+  <input type="hidden" name="apiKey" value={staticFormsApiKey} />
+  <input type="hidden" name="subject" value="New Client Intake Form — Order by Jules" />
+  <input type="hidden" name="replyTo" value="@" />
+  <div style="position:absolute;left:-9999px;"><input type="text" name="honeypot" tabindex="-1" autocomplete="off" /></div>
   <div id="step-names" class="hidden" data-steps={JSON.stringify(stepNames)}></div>
 
   <!-- ===== PROGRESS BAR ===== -->
@@ -93,7 +96,7 @@ const addons = [
         <div class="flex flex-wrap gap-x-6 gap-y-3">
           {['Text', 'Phone', 'Email'].map(method => (
             <label class="flex items-center gap-2.5 cursor-pointer group">
-              <input type="checkbox" name="communication" value={method} class="intake-check" />
+              <input type="checkbox" name="preferred_communication" value={method} class="intake-check" />
               <span class="text-warm group-hover:text-warm-dark transition-colors">{method}</span>
             </label>
           ))}
@@ -633,23 +636,20 @@ const addons = [
         const response = await fetch(form.action, {
           method: 'POST',
           body: new FormData(form),
-          headers: { Accept: 'application/json' },
         });
 
         if (response.ok) {
-          btnText.textContent = 'Form Submitted — Thank You!';
-          btn.classList.remove('bg-terracotta', 'hover:bg-terracotta-dark');
-          btn.classList.add('bg-sage');
-          form.reset();
-          document.querySelectorAll('#spaces-other-text, #referral-other-text, #deadline-date-wrap')
-            .forEach(el => el.classList.add('hidden'));
-          setTimeout(() => {
-            btnText.textContent = originalText;
-            btn.classList.remove('bg-sage');
-            btn.classList.add('bg-terracotta', 'hover:bg-terracotta-dark');
-            btn.disabled = false;
-            goToStep(1);
-          }, 4000);
+          form.innerHTML = `
+            <div class="flex flex-col items-center justify-center text-center py-16 px-6">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sage to-sage/70 flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="font-playfair text-2xl md:text-3xl text-warm-dark mb-3">Form submitted!</h3>
+              <p class="text-warm text-lg max-w-md">Jules typically responds in 24–48 hours.</p>
+            </div>
+          `;
         } else {
           throw new Error('Submission failed');
         }

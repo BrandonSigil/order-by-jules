@@ -99,7 +99,7 @@ import organizedDrawer from '../assets/oragnized-drawer.jpg';
       </p>
 
       <div class="opacity-0 animate-fade-up" style="animation-delay: 0.9s;">
-        <Button href="/contact" variant="primary" size="lg">
+        <Button href="/contact#contact-form" variant="primary" size="lg">
           Book Your Free Consultation
         </Button>
       </div>
@@ -250,19 +250,46 @@ import organizedDrawer from '../assets/oragnized-drawer.jpg';
       </div>
 
       <div class="text-center mt-16 reveal">
-        <Button href="/contact" variant="primary" size="lg">
+        <Button href="/contact#contact-form" variant="primary" size="lg">
           Schedule My Consultation
         </Button>
       </div>
     </div>
   </section>
 
-  <!-- ===== SECTION 4 — FINAL CTA ===== -->
+  <SectionDivider variant="wave2" toColor="#FBF7F2" />
+
+  <!-- ===== SECTION 4 — INSTAGRAM FEED ===== -->
+  <section class="bg-cream py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="font-cormorant text-lg italic text-gold mb-2 block reveal">Follow along</span>
+        <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight mb-4 reveal stagger-1">
+          On <em class="font-cormorant italic text-terracotta not-italic">Instagram</em>
+        </h2>
+        <a
+          href="https://instagram.com/order_by_jules"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block font-sans text-terracotta hover:text-terracotta-dark transition-colors text-lg reveal stagger-2"
+        >
+          @order_by_jules
+        </a>
+      </div>
+
+      <div id="instagram-feed" class="reveal stagger-3">
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-22c1ff65-0a84-4ea3-b326-76a72d613f4e" data-elfsight-app-lazy></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5 — FINAL CTA ===== -->
   <CTASection
     headline="Ready to Reclaim Your Space?"
     subtext="There is hope for your home. Let's restore it together."
     buttonText="Book Your Free Consultation"
-    buttonHref="/contact"
+    buttonHref="/contact#contact-form"
     variant="warm"
   />
 
