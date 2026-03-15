@@ -41,7 +41,7 @@ const { title, price, detail, featured = false, delay = 0 } = Astro.props;
 
   <p class:list={[
     'text-sm leading-relaxed',
-    featured ? 'text-cream/80' : 'text-warm',
+    featured ? 'text-cream' : 'text-warm',
   ]}>
     {detail}
   </p>
