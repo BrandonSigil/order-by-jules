@@ -1,7 +1,4 @@
 ---
-const staticFormsEndpoint = 'https://api.staticforms.dev/submit';
-const staticFormsApiKey = 'sf_k2dl9ek8mk677m4hdcncn314';
-
 const stepNames = [
   'Contact Information',
   'Your Space',
@@ -31,14 +28,7 @@ const addons = [
 ];
 ---
 
-<form
-  action={staticFormsEndpoint}
-  method="POST"
-  id="contact-form"
->
-  <input type="hidden" name="apiKey" value={staticFormsApiKey} />
-  <input type="hidden" name="subject" value="New Client Intake Form — Order by Jules" />
-  <input type="hidden" name="replyTo" value="@" />
+<form id="contact-form" novalidate>
   <div style="position:absolute;left:-9999px;"><input type="text" name="honeypot" tabindex="-1" autocomplete="off" /></div>
   <div id="step-names" class="hidden" data-steps={JSON.stringify(stepNames)}></div>
 
@@ -624,21 +614,43 @@ const addons = [
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       if (!validateCurrentStep()) return;
 
-      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const btnText = btn.querySelector('span')!;
+      const formEl = e.currentTarget as HTMLFormElement;
+      const btn = formEl.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const btnText = btn.querySelector('span') as HTMLElement;
       const originalText = btnText.textContent;
       btnText.textContent = 'Sending...';
       btn.disabled = true;
 
       try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
+        const payload: Record<string, string> = {
+          accessKey: 'sf_k2dl9ek8mk677m4hdcncn314',
+          subject: 'New Client Intake Form — Order by Jules',
+        };
+
+        // Collect all named form fields; join multi-value fields (checkboxes) with " | "
+        const elements = formEl.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea, select');
+        elements.forEach((el) => {
+          if (!el.name) return;
+          const input = el as HTMLInputElement;
+          if ((input.type === 'checkbox' || input.type === 'radio') && !input.checked) return;
+          if (payload[el.name]) payload[el.name] += ` | ${el.value}`;
+          else payload[el.name] = el.value;
         });
 
-        if (response.ok) {
+        payload.replyTo = payload.email || '';
+
+        const response = await fetch('https://api.staticforms.xyz/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
           form.innerHTML = `
             <div class="flex flex-col items-center justify-center text-center py-16 px-6">
               <div class="w-16 h-16 rounded-full bg-gradient-to-br from-sage to-sage/70 flex items-center justify-center mb-6">
@@ -651,13 +663,15 @@ const addons = [
             </div>
           `;
         } else {
-          throw new Error('Submission failed');
+          console.error('Static Forms error:', result.message);
+          throw new Error(result.message || 'Submission failed');
         }
-      } catch {
+      } catch (err) {
+        console.error('Form submission error:', err);
         btnText.textContent = 'Something went wrong — please try again';
         btn.disabled = false;
         setTimeout(() => {
-          btnText.textContent = originalText;
+          if (btnText) btnText.textContent = originalText;
         }, 3000);
       }
     });

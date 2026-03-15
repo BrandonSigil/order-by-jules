@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.staticforms.xyz)",
+      "WebFetch(domain:www.staticforms.xyz)",
+      "WebFetch(domain:www.staticforms.dev)"
+    ]
+  }
+}
