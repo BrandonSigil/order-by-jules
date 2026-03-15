@@ -512,18 +512,23 @@ const addons = [
       </div>
     </fieldset>
 
-    <div class="flex justify-between items-center pt-8 mt-8 border-t border-warm-muted/10">
-      <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-        Back
-      </button>
-      <button type="submit" class="inline-flex items-center justify-center font-sans font-semibold tracking-wide uppercase rounded-full transition-all duration-400 relative overflow-hidden group bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-xl hover:shadow-terracotta/20 px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base">
-        <span class="relative z-10">Schedule My Free Consultation</span>
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
-      </button>
+    <div class="pt-8 mt-8 border-t border-warm-muted/10 space-y-6">
+      <div id="turnstile-widget" class="flex justify-center"></div>
+      <div class="flex justify-between items-center">
+        <button type="button" data-action="back" class="inline-flex items-center gap-2 font-sans font-medium text-warm hover:text-terracotta transition-colors text-sm tracking-wide uppercase py-3">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          Back
+        </button>
+        <button type="submit" class="inline-flex items-center justify-center font-sans font-semibold tracking-wide uppercase rounded-full transition-all duration-400 relative overflow-hidden group bg-terracotta text-cream hover:bg-terracotta-dark hover:shadow-xl hover:shadow-terracotta/20 px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base">
+          <span class="relative z-10">Schedule My Free Consultation</span>
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+        </button>
+      </div>
     </div>
   </div>
 </form>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script>
   function initIntakeForm() {
@@ -618,6 +623,11 @@ const addons = [
       if (!validateCurrentStep()) return;
 
       const formEl = e.currentTarget as HTMLFormElement;
+      const turnstileToken = (formEl.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement)?.value;
+      if (!turnstileToken) {
+        alert('Please wait for the security check to complete.');
+        return;
+      }
       const btn = formEl.querySelector('button[type="submit"]') as HTMLButtonElement;
       const btnText = btn.querySelector('span') as HTMLElement;
       const originalText = btnText.textContent;
@@ -677,6 +687,28 @@ const addons = [
     });
   }
 
-  initIntakeForm();
-  document.addEventListener('astro:after-swap', initIntakeForm);
+  function renderTurnstile() {
+    const container = document.getElementById('turnstile-widget');
+    if (!container) return;
+    // Clear any previous render (e.g. after view transition)
+    container.innerHTML = '';
+    if (typeof (window as any).turnstile === 'undefined') return;
+    (window as any).turnstile.render(container, {
+      sitekey: '0x4AAAAAACrXGcI8ptGQ_32d',
+      theme: 'light',
+    });
+  }
+
+  function initIntakeFormAndTurnstile() {
+    initIntakeForm();
+    // Render immediately if Turnstile is already loaded, otherwise wait for it
+    if (typeof (window as any).turnstile !== 'undefined') {
+      renderTurnstile();
+    } else {
+      (window as any).onloadTurnstileCallback = renderTurnstile;
+    }
+  }
+
+  initIntakeFormAndTurnstile();
+  document.addEventListener('astro:after-swap', initIntakeFormAndTurnstile);
 </script>
