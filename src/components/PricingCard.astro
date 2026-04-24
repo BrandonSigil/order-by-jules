@@ -4,27 +4,35 @@ interface Props {
   price: string;
   detail: string;
   featured?: boolean;
+  /** When `featured`, show the “Most Popular” pill. Defaults to true; set false to use featured styling without the badge. */
+  showPopularBadge?: boolean;
+  /** Extra top/bottom padding so a card can read taller than siblings (e.g. primary pricing card). */
+  relaxedVertical?: boolean;
   delay?: number;
 }
 
-const { title, price, detail, featured = false, delay = 0 } = Astro.props;
+const { title, price, detail, featured = false, showPopularBadge, relaxedVertical = false, delay = 0 } = Astro.props;
+const displayPopularBadge = featured && (showPopularBadge ?? true);
 ---
 
 <div class:list={[
-  'relative rounded-2xl p-8 md:p-10 card-hover reveal',
+  'relative rounded-2xl px-8 md:px-10 card-hover reveal',
+  relaxedVertical
+    ? 'pt-11 pb-11 md:pt-16 md:pb-16'
+    : 'py-9 md:py-10',
   featured
     ? 'bg-gradient-to-br from-terracotta to-terracotta-dark text-cream shadow-xl shadow-terracotta/20'
     : 'bg-white border-2 border-gold-light',
   delay > 0 && `stagger-${delay}`,
 ]}>
-  {featured && (
+  {displayPopularBadge && (
     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-warm-dark text-xs font-sans font-bold uppercase tracking-widest px-4 py-1 rounded-full">
       Most Popular
     </div>
   )}
 
   <h3 class:list={[
-    'font-playfair text-2xl mb-2',
+    'font-playfair text-3xl md:text-[2rem] tracking-tight mb-3',
     featured ? 'text-cream' : 'text-warm-dark',
   ]}>
     {title}

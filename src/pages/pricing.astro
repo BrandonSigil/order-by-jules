@@ -26,96 +26,73 @@ import closetRack from '../assets/alyssa-strohmann-TS--uNw-JqE-unsplash.jpg';
   <SectionDivider variant="curve" toColor="#FFFFFF" />
 
   <!-- ===== PRICING CARDS ===== -->
-  <section class="bg-white py-20 md:py-28">
+  <section class="bg-white py-24 md:py-32">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Hourly Rate -->
-        <PricingCard
-          title="Hourly Rate"
-          price="$45"
-          detail="Per hour with a 2-hour minimum per session. Perfect for targeted spaces or first-time clients."
-          delay={1}
-        >
-          <ul class="space-y-3">
-            <li class="flex items-start gap-2 text-sm text-warm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Hands-on organizing
-            </li>
-            <li class="flex items-start gap-2 text-sm text-warm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Decision-making support
-            </li>
-            <li class="flex items-start gap-2 text-sm text-warm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Light cleaning included
-            </li>
-          </ul>
-        </PricingCard>
-
-        <!-- Flat Rate (featured) -->
-        <PricingCard
-          title="Flat-Rate Projects"
-          price="$100–$350"
-          detail="Scoped to your specific needs. Ideal for single rooms, closet overhauls, or move-in setups."
-          featured={true}
-          delay={2}
-        >
-          <ul class="space-y-3">
-            <li class="flex items-start gap-2 text-sm text-cream">
-              <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Everything in Hourly
-            </li>
-            <li class="flex items-start gap-2 text-sm text-cream">
-              <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Fixed cost for peace of mind
-            </li>
-            <li class="flex items-start gap-2 text-sm text-cream">
-              <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Labels included
-            </li>
-          </ul>
-        </PricingCard>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 md:items-start max-w-5xl mx-auto">
+        <!-- Hourly Rate (featured styling, wider column) -->
+        <div class="md:col-span-7">
+          <PricingCard
+            title="Hourly Rate"
+            price="$45"
+            detail="Per hour with a 2-hour minimum per session. Perfect for targeted spaces or first-time clients."
+            featured={true}
+            showPopularBadge={false}
+            relaxedVertical={true}
+            delay={1}
+          >
+            <ul class="space-y-3">
+              <li class="flex items-start gap-2 text-sm text-cream">
+                <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Hands-on organizing
+              </li>
+              <li class="flex items-start gap-2 text-sm text-cream">
+                <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Decision-making support
+              </li>
+              <li class="flex items-start gap-2 text-sm text-cream">
+                <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Light cleaning included
+              </li>
+            </ul>
+          </PricingCard>
+        </div>
 
         <!-- Travel -->
-        <PricingCard
-          title="Travel Fee"
-          price="$45"
-          detail="An additional fee for jobs located more than 1 hour from the Greater Tacoma & Gig Harbor area. Local clients — no travel fee!"
-          delay={3}
-        >
-          <ul class="space-y-3">
-            <li class="flex items-start gap-2 text-sm text-warm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Free within Tacoma area
-            </li>
+        <div class="md:col-span-5">
+          <PricingCard
+            title="Travel Fee"
+            price="$45"
+            detail="An additional fee for jobs located more than 1 hour from the Greater Tacoma & Gig Harbor area. Local clients — no travel fee!"
+            delay={2}
+          >
+            <ul class="space-y-3">
+              <li class="flex items-start gap-2 text-sm text-warm">
+                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Free within Tacoma area
+              </li>
 
-            <li class="flex items-start gap-2 text-sm text-warm">
-              <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Quoted upfront
-            </li>
-            <li class="pt-2 text-sm">
-              <a href="/contact#contact-form" class="text-terracotta hover:text-terracotta-dark underline underline-offset-2 transition-colors">
-                Reach out for a quote
-              </a>
-            </li>
-          </ul>
-        </PricingCard>
+              <li class="flex items-start gap-2 text-sm text-warm">
+                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Quoted upfront
+              </li>
+              <li class="pt-2 text-sm">
+                <a href="/contact#contact-form" class="text-terracotta hover:text-terracotta-dark underline underline-offset-2 transition-colors">
+                  Reach out for a quote
+                </a>
+              </li>
+            </ul>
+          </PricingCard>
+        </div>
       </div>
     </div>
   </section>
