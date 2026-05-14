@@ -1,14 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import Button from '../components/Button.astro';
-import PricingCard from '../components/PricingCard.astro';
 import SectionDivider from '../components/SectionDivider.astro';
 import CTASection from '../components/CTASection.astro';
 import closetRack from '../assets/alyssa-strohmann-TS--uNw-JqE-unsplash.jpg';
 ---
 
-<Layout title="Pricing" description="Clear pricing for home organization services. Starting at $40/hour with no surprises. Serving the Greater Tacoma Area.">
+<Layout title="Pricing" description="Thoughtful, quote-based pricing for home organization projects of every size. Serving the Greater Tacoma Area.">
 
   <!-- ===== PAGE HEADER ===== -->
   <section class="bg-cream pt-20 pb-12 md:pt-28 md:pb-16">
@@ -18,80 +16,30 @@ import closetRack from '../assets/alyssa-strohmann-TS--uNw-JqE-unsplash.jpg';
         Investment
       </h1>
       <p class="text-lg text-warm max-w-2xl mx-auto reveal stagger-2">
-        Clear pricing. No surprises. Just honest work toward a more peaceful home.
+        Every home and every project is different. We'll talk through your space, your goals, and the support you need before putting together a quote.
       </p>
     </div>
   </section>
 
   <SectionDivider variant="curve" toColor="#FFFFFF" />
 
-  <!-- ===== PRICING CARDS ===== -->
+  <!-- ===== QUOTE MESSAGE ===== -->
   <section class="bg-white py-24 md:py-32">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 md:items-start max-w-5xl mx-auto">
-        <!-- Hourly Rate (featured styling, wider column) -->
-        <div class="md:col-span-7">
-          <PricingCard
-            title="Hourly Rate"
-            price="$45"
-            detail="Per hour with a 2-hour minimum per session. Perfect for targeted spaces or first-time clients."
-            featured={true}
-            showPopularBadge={false}
-            relaxedVertical={true}
-            delay={1}
-          >
-            <ul class="space-y-3">
-              <li class="flex items-start gap-2 text-sm text-cream">
-                <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Hands-on organizing
-              </li>
-              <li class="flex items-start gap-2 text-sm text-cream">
-                <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Decision-making support
-              </li>
-              <li class="flex items-start gap-2 text-sm text-cream">
-                <svg class="w-5 h-5 text-gold-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Light cleaning included
-              </li>
-            </ul>
-          </PricingCard>
-        </div>
-
-        <!-- Travel -->
-        <div class="md:col-span-5">
-          <PricingCard
-            title="Travel Fee"
-            price="$45"
-            detail="An additional fee for jobs located more than 1 hour from the Greater Tacoma & Gig Harbor area. Local clients — no travel fee!"
-            delay={2}
-          >
-            <ul class="space-y-3">
-              <li class="flex items-start gap-2 text-sm text-warm">
-                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Free within Tacoma area
-              </li>
-
-              <li class="flex items-start gap-2 text-sm text-warm">
-                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Quoted upfront
-              </li>
-              <li class="pt-2 text-sm">
-                <a href="/contact#contact-form" class="text-terracotta hover:text-terracotta-dark underline underline-offset-2 transition-colors">
-                  Reach out for a quote
-                </a>
-              </li>
-            </ul>
-          </PricingCard>
+      <div class="relative max-w-4xl mx-auto text-center reveal">
+        <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-gold/20 via-cream to-terracotta/10 blur-2xl opacity-70"></div>
+        <div class="relative overflow-hidden rounded-[2rem] bg-cream border border-gold-light/40 px-8 py-14 md:px-16 md:py-20 shadow-xl shadow-warm-dark/10">
+          <div class="absolute top-0 left-1/2 h-1 w-28 -translate-x-1/2 rounded-b-full bg-gradient-to-r from-gold to-terracotta"></div>
+          <span class="font-cormorant text-xl italic text-gold mb-4 block">Personalized quotes</span>
+          <h2 class="font-playfair text-3xl md:text-5xl text-warm-dark leading-tight mb-6">
+            Support for big resets and small projects alike.
+          </h2>
+          <p class="text-lg md:text-xl text-warm leading-relaxed max-w-2xl mx-auto">
+            I love helping with projects of every size. Once we've got a clear picture of your space, your goals, and the project scope, I'll send over a thoughtful quote so we can start restoring order back to your home.
+          </p>
+          <a href="/contact#contact-form" class="inline-flex items-center justify-center mt-10 rounded-full bg-terracotta px-8 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-terracotta/20 transition-all duration-300 hover:bg-terracotta-dark hover:-translate-y-0.5">
+            Start With a Free Consultation
+          </a>
         </div>
       </div>
     </div>
